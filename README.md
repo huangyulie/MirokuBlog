@@ -1,3 +1,8 @@
+## 使用
+npm i 安装依赖
+npm start 开启项目
+npm run build 打包
+
 ## 所需依赖
 npm i eslint-webpack-plugin html-webpack-plugin style-loader css-loader postcss-loader postcss-preset-env less-loader sass-loader sass -D
 
