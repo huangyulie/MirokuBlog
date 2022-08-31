@@ -29,22 +29,22 @@ const getStyleLoaders = (preProcessor) => {
       options:
         preProcessor === "less-loader"
           ? {
-              // antd的自定义主题
-              lessOptions: {
-                modifyVars: {
-                  // 其他主题色：https://ant.design/docs/react/customize-theme-cn
-                  "@primary-color": "#1DA57A", // 全局主色
-                },
-                javascriptEnabled: true,
+            // antd的自定义主题
+            lessOptions: {
+              modifyVars: {
+                // 其他主题色：https://ant.design/docs/react/customize-theme-cn
+                "@primary-color": "#1DA57A", // 全局主色
               },
-            }
+              javascriptEnabled: true,
+            },
+          }
           : {},
     },
   ].filter(Boolean);
 };
 
 module.exports = {
-  entry: "./src/main.js",
+  entry: "./src/main.tsx",
   output: {
     path: isProduction ? path.resolve(__dirname, "../dist") : undefined,
     filename: isProduction
@@ -110,8 +110,8 @@ module.exports = {
                 options: {
                   presets: ['@babel/preset-react']
                 }
-              },{
-                loader:'ts-loader'
+              }, {
+                loader: 'ts-loader'
               }
             ]
           }
@@ -121,10 +121,10 @@ module.exports = {
   },
   plugins: [
     new WebpackBar({
-        color: "blue",  // 默认green，进度条颜色支持HEX
-        basic: false,   // 默认true，启用一个简单的日志报告器
-        profile:false,  // 默认false，启用探查器。
-      }),
+      color: "blue",  // 默认green，进度条颜色支持HEX
+      basic: false,   // 默认true，启用一个简单的日志报告器
+      profile: false,  // 默认false，启用探查器。
+    }),
     new ESLintWebpackPlugin({
       extensions: [".js", ".jsx"],
       context: path.resolve(__dirname, "../src"),
@@ -139,10 +139,10 @@ module.exports = {
       template: path.resolve(__dirname, "../public/index.html"),
     }),
     isProduction &&
-      new MiniCssExtractPlugin({
-        filename: "static/css/[name].[contenthash:10].css",
-        chunkFilename: "static/css/[name].[contenthash:10].chunk.css",
-      }),
+    new MiniCssExtractPlugin({
+      filename: "static/css/[name].[contenthash:10].css",
+      chunkFilename: "static/css/[name].[contenthash:10].chunk.css",
+    }),
     !isProduction && new ReactRefreshWebpackPlugin(),
     // 将public下面的资源复制到dist目录去（除了index.html）
     new CopyPlugin({
@@ -213,7 +213,10 @@ module.exports = {
     },
   },
   resolve: {
-    extensions: [".tsx",".ts",".jsx", ".js", ".json"],
+    alias: {
+      '@': path.resolve(__dirname, '../src')
+    },
+    extensions: [".tsx", ".ts", ".jsx", ".js", ".json"],
   },
   devServer: {
     open: true,

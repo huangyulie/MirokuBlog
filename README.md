@@ -86,3 +86,29 @@ plugins.push(progressPlugin)
 
 
 
+
+## react18-redux-toolkit
+
+npm i @reduxjs/toolkit react-redux
+
+```javascript
+// src/store/store.js
+import { configureStore } from "@reduxjs/toolkit";
+
+export const store = configureStore({
+    reducer:{},
+})
+
+export type RootState = ReturnType<typeof store.getState>
+
+export type AppDispatch = typeof store.dispatch
+
+export default store
+
+// main.js
+<Provider store={store}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>
+```

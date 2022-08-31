@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npm run dev",
-    "dev": "cross-env NODE_ENV=development webpack serve --config ./config/webpack.config.js",
-    "build": "cross-env NODE_ENV=production webpack --config ./config/webpack.config.js"
+    "start": " npm run dev",
+    "dev": " cross-env NODE_ENV=development webpack serve --config ./config/webpack.config.js",
+    "build": " cross-env NODE_ENV=production webpack --config ./config/webpack.config.js"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +19,7 @@
   "devDependencies": {
     "@babel/core": "^7.18.13",
     "@babel/preset-typescript": "^7.18.6",
+    "@craco/craco": "^6.4.5",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.7",
     "babel-loader": "^8.2.5",
     "babel-preset-react-app": "^10.0.1",
@@ -45,10 +46,12 @@
     "webpackbar": "^5.0.2"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.8.5",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-redux": "^8.0.2",
     "react-router-dom": "^6.3.0"
   }
 }
