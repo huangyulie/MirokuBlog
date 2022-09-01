@@ -8,6 +8,7 @@ import '@/App.less';
 
 const Home = lazy(() => import('@/pages/Home/index'))
 const About = lazy(() => import('@/pages/About/index'))
+const Article = lazy(()=>import('@/pages/Article/inedx'))
 
 
 export default function App() {
@@ -18,6 +19,12 @@ export default function App() {
         <Routes>
           <Route path="/about" element={<About />} ></Route>
           <Route path="/home" element={<Home />}></Route>
+          <Route path="/article" element={<Article />}></Route>
+          <Route path="/imgs" element={<Home />}></Route>
+          <Route path="/talk" element={<Home />}></Route>
+          <Route path="/comment" element={<Home />}></Route>
+          <Route path="/works" element={<Home />}></Route>
+          <Route path="/experienced" element={<Home />}></Route>
           <Route path="*" element={<Navigate to="/home"/>}></Route>
         </Routes>
       </Suspense>

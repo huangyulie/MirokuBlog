@@ -9,7 +9,7 @@ const CopyPlugin = require("copy-webpack-plugin");
 const WebpackBar = require('webpackbar');
 
 const isProduction = process.env.NODE_ENV === "production";
-
+isProduction ? console.log('开始打包') : console.log('开启项目中');
 const getStyleLoaders = (preProcessor) => {
   return [
     isProduction ? MiniCssExtractPlugin.loader : "style-loader",
@@ -77,7 +77,7 @@ module.exports = {
             use: getStyleLoaders("stylus-loader"),
           },
           {
-            test: /\.(png|jpe?g|gif|svg)$/,
+            test: /\.(png|jpe?g|gif|svg|webp)$/,
             type: "asset",
             parser: {
               dataUrlCondition: {
@@ -90,7 +90,7 @@ module.exports = {
             type: "asset/resource",
           },
           {
-            test: /\.(jsx|js)$/,
+            test: /\.(jsx|js|tsx|ts)$/,
             include: path.resolve(__dirname, "../src"),
             loader: "babel-loader",
             options: {
@@ -101,19 +101,6 @@ module.exports = {
                 !isProduction && "react-refresh/babel",
               ].filter(Boolean),
             },
-          },
-          {
-            test: /\.tsx?/,
-            use: [
-              {
-                loader: 'babel-loader',
-                options: {
-                  presets: ['@babel/preset-react']
-                }
-              }, {
-                loader: 'ts-loader'
-              }
-            ]
           }
         ],
       },
