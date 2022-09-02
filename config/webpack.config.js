@@ -33,7 +33,7 @@ const getStyleLoaders = (preProcessor) => {
             lessOptions: {
               modifyVars: {
                 // 其他主题色：https://ant.design/docs/react/customize-theme-cn
-                "@primary-color": "#1DA57A", // 全局主色
+                "@primary-color": "#000", // 全局主色
               },
               javascriptEnabled: true,
             },

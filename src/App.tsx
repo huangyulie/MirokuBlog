@@ -4,6 +4,7 @@ import { Routes, Route , Navigate } from 'react-router-dom'
 // import Home from './pages/Home/index'
 import Header from '@/components/Header/index'
 import Footer from '@/components/Footer/index'
+import Loading from './components/Loading/Loading'
 import '@/App.less';
 
 const Home = lazy(() => import('@/pages/Home/index'))
@@ -13,9 +14,9 @@ const Article = lazy(()=>import('@/pages/Article/inedx'))
 
 export default function App() {
   return (
-    <div>
+    <div className='site'>
       <Header>213</Header>
-      <Suspense fallback={<div>loading....</div>}>
+      <Suspense fallback={<Loading/>}>
         <Routes>
           <Route path="/about" element={<About />} ></Route>
           <Route path="/home" element={<Home />}></Route>
@@ -28,6 +29,7 @@ export default function App() {
           <Route path="*" element={<Navigate to="/home"/>}></Route>
         </Routes>
       </Suspense>
+      <div className='main'></div>
       <Footer>132</Footer>
     </div>
   )

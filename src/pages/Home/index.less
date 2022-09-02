@@ -1,6 +1,6 @@
 .Home {
     width: 100%;
-
+    user-select: none;
     .Home-topic {
         position: relative;
         width: 100%;
@@ -14,7 +14,7 @@
             text-shadow: black 10px 10px 10px, blue 20px 20px 20px;
             width: 600px;
             height: 100px;
-            top: 300px;
+            top: 30vh;
             left: 50%;
             margin-left: -300px;
         }
@@ -23,7 +23,7 @@
             color: white;
             position: absolute;
             width: 600px;
-            top: 400px;
+            top: 45vh;
             left: 50%;
             margin-left: -300px;
             text-align: center;
@@ -61,6 +61,7 @@
                     }
                     &:hover{
                         transform: translateY(-10px);
+                        opacity: 0.9;
                     }
                     &:hover ~ div{
                         transform: translateY(-200px);

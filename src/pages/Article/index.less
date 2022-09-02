@@ -1,0 +1,172 @@
+.Acticle {
+    width: 100%;
+
+    .Acticle-top {
+        width: 80%;
+        margin-left: 10%;
+        margin-top: 100px;
+
+        .Acticle-card {
+            background-color: rgb(246, 246, 250);
+        }
+
+        .Acticle-section {
+            display: flex;
+
+            .Acticle-section-left {
+                display: flex;
+                flex-direction: column;
+                flex: 3;
+
+                .Acticle-section-left-acticle {
+                    cursor: pointer;
+                    width: 90%;
+                    height: 150px;
+                    background-color: #fff;
+                    display: flex;
+                    margin-top: 15px;
+                    box-shadow: 0 0 18px rgb(0 0 0 / 30%);
+                    border-radius: 10px;
+                    transition: all 0.3s;
+                    overflow: hidden;
+
+                    .Acticle-section-left-acticle-left {
+                        flex: 3;
+                        display: flex;
+                        flex-direction: column;
+                        text-align: center;
+                        line-height: 40px;
+                        div{
+                            flex: 1;
+                        }
+                        .name{
+                            font-size: 30px;
+                            font-weight: 700;
+                        }
+                        .label{
+                            display: flex;
+                        }
+                    }
+
+                    .Acticle-section-left-acticle-right {
+                        flex: 1;
+                        overflow: hidden;
+                        img {
+                            object-fit: cover;
+                            height: 100%;
+                            width: 100%;
+                        }
+                    }
+
+                    &:hover {
+                        transform: translateY(-5px);
+                    }
+                }
+            }
+
+            .Acticle-section-right {
+                flex: 1;
+                .Acticle-section-right-all{
+                    width: 100%;
+                    height: 800px;
+                    
+                    display: flex;
+                    flex-direction: column;
+                    div{
+                        margin-top: 15px;
+                        box-shadow: 0 0 18px rgb(0 0 0 / 30%);
+                        background-color: rgb(255, 255, 255);
+                        border-radius: 10px;
+                    }
+                    .all-1{
+                        flex: 1;
+                        display: flex;
+                        div{
+                            margin-top: 10px;
+                            text-align: center;
+                            flex: 1;
+                            box-shadow: 0 0 0;
+                            div{
+                                flex: 1;
+                                cursor: pointer;
+                            }
+                            .all-1-1{
+                                font-size: 20px;
+                            }
+                            .all-1-2{
+                                font-size: 15px;
+                                font-weight: 700;
+                            }
+                        }
+                    }
+                    .all-2{
+                        flex: 4;
+                        display: flex;
+                        flex-direction: column;
+                        overflow: hidden;
+                        div{
+                            box-shadow: 0 0 0;
+                            margin-top: 0px;
+                        }
+                        .all-2-top{
+                            flex: 1;
+                            padding: 5px;
+                            font-size: 20px;
+                            font-weight: 700;
+                            position: relative;
+                            background-color: rgb(243, 243, 243);
+                            border-bottom: 1px rgb(199, 197, 197) solid;
+                            border-radius: 0;
+                            cursor: pointer;
+                            div{
+                                background-color: transparent;
+                            }
+                            .all-2-1{
+                                position: absolute;
+                                left: 10px;
+                                top: 5px;
+                            }
+                            .all-2-2{
+                                position: absolute;
+                                right: 10px;
+                                top: 5px;
+                            }
+                        }
+                        .all-2-bottom{
+                            flex: 9;
+                            .all-2-bottom-1{
+                                // background-color: red;
+                                height: 100%;
+                                border-radius: 0;
+                                display: flex;
+                                flex-direction: column;
+                                flex-wrap: wrap;
+                                div{
+                                    position: relative;
+                                    background-color: transparent;
+                                    border-radius: 0;
+                                    flex: 0 0 10%;
+                                    padding: 0 40px;
+                                    font-weight: 700;
+                                    cursor: pointer;
+                                    &:hover{
+                                        background-color: rgb(240, 240, 240);
+                                    }
+                                    p{
+                                        position: absolute;
+                                        top: 0;
+                                        right: 40px;
+                                    }
+                                }
+                            }
+                        }   
+                    }
+                    .all-3{
+                        flex: 5;
+                    }
+
+                }
+            }
+        }
+    }
+}

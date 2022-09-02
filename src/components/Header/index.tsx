@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 // import { Button } from "antd";
-import { BankOutlined, SettingOutlined } from "@ant-design/icons";
+import { HomeOutlined, SettingOutlined } from "@ant-design/icons";
 import "./index.less";
 // import 'antd/dist/antd.less'
 
@@ -33,7 +33,7 @@ export default function Index(props: any) {
           to="home"
           onClick={() => changeTitle("首页|MirokuBlog")}
         >
-          <BankOutlined />
+          <HomeOutlined />
         </NavLink>
       </div>
       <div className="Header-nav">

@@ -2,6 +2,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    // color: black;
 }
 
 ul li{
@@ -14,10 +15,20 @@ a{
 }
 
 body{
+    position: relative;
     background:url(../public/morning.jpg) no-repeat fixed;
     background-size: cover;
+    overflow: overlay;
 }
 
+.site{
+    display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+.main{
+    flex: 1;
+}
 
 /*整个滚动条*/
 ::-webkit-scrollbar {
