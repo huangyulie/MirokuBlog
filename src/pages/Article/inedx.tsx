@@ -10,6 +10,7 @@ import {
   TagsOutlined
 } from "@ant-design/icons";
 import "./index.less";
+import { useNavigate } from "react-router-dom";
 
 const { Search } = Input;
 
@@ -31,6 +32,7 @@ export default function Inedx() {
   const [acticles, setActicle] = useState<ActiclePorps[]>([]);
   const [search, setSearch] = useState<boolean>(false);
   const [text, setText] = useState<string>("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     setActicle([
@@ -98,7 +100,8 @@ export default function Inedx() {
   };
 
   // 点击文章跳转功能
-  const onClickHandle = (props: number) => {
+  const OnClickHandle = (props: number) => {
+    navigate(`/article/${props}`);
     console.log(props);
   };
   return (
@@ -124,7 +127,7 @@ export default function Inedx() {
               {acticles.map((item, index) => {
                 return (
                   <div
-                    onClick={() => onClickHandle(item.id)}
+                    onClick={() => OnClickHandle(item.id)}
                     key={item.id}
                     className="Acticle-section-left-acticle"
                   >
@@ -221,7 +224,7 @@ export default function Inedx() {
                   </div>
                 </div>
                 <div className="all-3">
-                  
+
                 </div>
               </div>
             </div>
