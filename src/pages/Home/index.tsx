@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import moment from "moment";
+import { useNavigate } from "react-router-dom";
 import "./index.less";
 import "../../../public/node.webp";
 
@@ -10,19 +11,21 @@ interface label {
 }
 
 const Home: React.FC = (): React.ReactElement => {
-  let [data, setData] = useState<String>(moment().format("YYYY-MM-DD HH:mm"));
+  let [data, setData] = useState<string>(moment().format("YYYY-MM-DD HH:mm"));
   let [label, setLabel] = useState<label[]>([]);
+
+  const navigate = useNavigate();
 
   // 显示标签
   useEffect(() => {
     setLabel([
-      { imgUrl: "/html.webp", labelName: "HTML笔记",id:1 },
-      { imgUrl: "/css.webp", labelName: "CSS笔记" ,id:2},
-      { imgUrl: "/js.webp", labelName: "javascript笔记" ,id:3},
-      { imgUrl: "/react.webp", labelName: "react笔记" ,id:4},
-      { imgUrl: "/http.webp", labelName: "http笔记" ,id:5},
-      { imgUrl: "/node.webp", labelName: "node笔记" ,id:6},
-      { imgUrl: "/ts.webp", labelName: "typescript笔记" ,id:7},
+      { imgUrl: "/html.webp", labelName: "HTML",id:1 },
+      { imgUrl: "/css.webp", labelName: "CSS" ,id:2},
+      { imgUrl: "/js.webp", labelName: "Javascript" ,id:3},
+      { imgUrl: "/react.webp", labelName: "React" ,id:4},
+      { imgUrl: "/http.webp", labelName: "Http" ,id:5},
+      { imgUrl: "/node.webp", labelName: "NodeJS" ,id:6},
+      { imgUrl: "/ts.webp", labelName: "Typescript" ,id:7},
       { imgUrl: "/随笔.webp", labelName: "随笔" ,id:8},
       
     ]);
@@ -37,6 +40,11 @@ const Home: React.FC = (): React.ReactElement => {
     };
   }, [data]);
 
+  const onclickHandle = (props: string)=>{
+    console.log(props);
+    navigate(`/article`,{state:{name: props}});
+  } 
+
   return (
     <div className="Home">
       <div className="Home-topic">
@@ -47,7 +55,7 @@ const Home: React.FC = (): React.ReactElement => {
         <div className="Home-title-top">
           {label.map((item) => {
             return (
-              <div className="Home-title-top-sign" key={item.id}>
+              <div className="Home-title-top-sign" key={item.id} onClick={()=>onclickHandle(item.labelName)}>
                 <div className="Home-title-top-sign-label">
                   <img src={item.imgUrl} alt="图片" />
                 </div>

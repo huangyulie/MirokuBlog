@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MyMessage from "@/components/MyMessage/Index";
 import { Button, Card } from "antd";
 import MdEditor from "md-editor-rt";
@@ -21,6 +21,10 @@ export default function Markdown() {
   const onClick = () => {
     navigate("/article");
   };
+
+  useEffect(()=>{
+    window.document.documentElement.scrollTop = 0;
+  },[])
 
   return (
     <div className="Markdown">

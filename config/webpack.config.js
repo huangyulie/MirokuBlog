@@ -214,5 +214,5 @@ module.exports = {
     historyApiFallback: true,
   },
   mode: isProduction ? "production" : "development",
-  performance: false, // 关闭性能分析，提示速度
+  performance: false, // 关闭性能分析，提示速度,
 };

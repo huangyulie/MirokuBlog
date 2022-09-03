@@ -1,5 +1,5 @@
 import React, { useEffect, useState, ChangeEvent } from "react";
-import { Card, Tag, Input, message } from "antd";
+import { Card, Tag, Input, message, Pagination } from "antd";
 import MyMessage from "@/components/MyMessage/Index";
 import {
   CalendarOutlined,
@@ -7,10 +7,11 @@ import {
   FullscreenOutlined,
   BookOutlined,
   BranchesOutlined,
-  TagsOutlined
+  TagsOutlined,
 } from "@ant-design/icons";
 import "./index.less";
-import { useNavigate } from "react-router-dom";
+import { useNavigate ,useLocation} from "react-router-dom";
+import { http } from "@/utils/index";
 
 const { Search } = Input;
 
@@ -28,13 +29,37 @@ interface ActiclePorps {
   refershDate: string;
 }
 
+interface StateIprops{
+  name: string;
+}
+
 export default function Inedx() {
   const [acticles, setActicle] = useState<ActiclePorps[]>([]);
   const [search, setSearch] = useState<boolean>(false);
   const [text, setText] = useState<string>("");
+  const [condition,setCondition] = useState<string>('全部文章');
   const navigate = useNavigate();
-
+  const Location = useLocation();
+  
   useEffect(() => {
+    const data = async()=>{
+      try{
+        let {status , data} = await http.get('/acticle/all?pagesize=1');
+        console.log(data);
+      }catch(err){
+        message.error('请求失败');
+      }
+    }
+    data();
+    
+    let name;
+    if(Location.state !== null){
+      name = (Location.state as StateIprops).name;
+    }else{
+      name = "全部文章"
+    }
+    setCondition(name);
+    
     setActicle([
       {
         id: 1312413,
@@ -109,7 +134,7 @@ export default function Inedx() {
       <div className="Acticle-top">
         <MyMessage />
         <Card
-          title="全部文章"
+          title={`${condition} 6篇`}
           className="Acticle-card"
           extra={
             <Search
@@ -180,27 +205,44 @@ export default function Inedx() {
                   </div>
                 );
               })}
+              <Pagination
+                className="pagination"
+                showQuickJumper
+                defaultCurrent={1}
+                defaultPageSize={5}
+                total={100}
+                showSizeChanger={false}
+              />
             </div>
             <div className="Acticle-section-right">
               <div className="Acticle-section-right-all">
                 <div className="all-1">
                   <div>
-                    <div className="all-1-1"><BookOutlined />文章</div>
+                    <div className="all-1-1">
+                      <BookOutlined />
+                      文章
+                    </div>
                     <div className="all-1-2">2篇</div>
                   </div>
                   <div className="all-1-2">
-                    <div className="all-1-1"><BranchesOutlined />分类</div>
+                    <div className="all-1-1">
+                      <BranchesOutlined />
+                      分类
+                    </div>
                     <div className="all-1-2">2篇</div>
                   </div>
                   <div className="all-1-3">
-                    <div className="all-1-1"><TagsOutlined />标签</div>
+                    <div className="all-1-1">
+                      <TagsOutlined />
+                      标签
+                    </div>
                     <div className="all-1-2">2篇</div>
                   </div>
                 </div>
                 <div className="all-2">
                   <div className="all-2-top">
                     <div className="all-2-1">
-                    <FullscreenOutlined />
+                      <FullscreenOutlined />
                       展开
                     </div>
                     <div className="all-2-2">
@@ -209,23 +251,23 @@ export default function Inedx() {
                     </div>
                   </div>
                   <div className="all-2-bottom">
-                      <div className="all-2-bottom-1">
-                       <div>2022年十月<p>2篇</p></div>
-                       <div>2</div>
-                       <div>3</div>
-                       <div>4</div>
-                       <div>5</div>
-                       <div>6</div>
-                       <div>7</div>
-                       <div>8</div>
-                       <div>9</div>
-                       <div>10</div>
+                    <div className="all-2-bottom-1">
+                      <div>
+                        2022年十月<p>2篇</p>
                       </div>
+                      <div>2</div>
+                      <div>3</div>
+                      <div>4</div>
+                      <div>5</div>
+                      <div>6</div>
+                      <div>7</div>
+                      <div>8</div>
+                      <div>9</div>
+                      <div>10</div>
+                    </div>
                   </div>
                 </div>
-                <div className="all-3">
-
-                </div>
+                <div className="all-3"></div>
               </div>
             </div>
           </div>
