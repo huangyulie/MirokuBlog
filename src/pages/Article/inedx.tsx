@@ -1,5 +1,5 @@
 import React, { useEffect, useState, ChangeEvent } from "react";
-import { Card, Tag, Input, message, Pagination } from "antd";
+import { Card, Tag, Input, message, Pagination, Modal } from "antd";
 import MyMessage from "@/components/MyMessage/Index";
 import {
   CalendarOutlined,
@@ -10,7 +10,7 @@ import {
   TagsOutlined,
 } from "@ant-design/icons";
 import "./index.less";
-import { useNavigate ,useLocation} from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { http } from "@/utils/index";
 
 const { Search } = Input;
@@ -21,7 +21,7 @@ interface labelProps {
 }
 
 interface ActiclePorps {
-  id: number;
+  _id: number;
   name: string;
   label: Array<labelProps>;
   img: string;
@@ -29,7 +29,19 @@ interface ActiclePorps {
   refershDate: string;
 }
 
-interface StateIprops{
+interface StateIprops {
+  name: string;
+}
+
+interface httpIprops {
+  status: number;
+  data: Array<ActiclePorps>;
+  articleLength: number;
+}
+
+interface classifyIprops {
+  imgUrl: string;
+  _id: number;
   name: string;
 }
 
@@ -37,87 +49,74 @@ export default function Inedx() {
   const [acticles, setActicle] = useState<ActiclePorps[]>([]);
   const [search, setSearch] = useState<boolean>(false);
   const [text, setText] = useState<string>("");
-  const [condition,setCondition] = useState<string>('全部文章');
+  const [condition, setCondition] = useState<string>("全部文章");
+  const [articleLength, setLength] = useState(0);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [current , setCurrent] = useState(1);
+  // 获取分类
+  const [classify, setClassify] = useState<classifyIprops[]>([]);
+  // 获取所有文章数量
+  const [length, setTextLength] = useState<number>(0);
+
   const navigate = useNavigate();
   const Location = useLocation();
-  
+  const pagesize = 5;
+
   useEffect(() => {
-    const data = async()=>{
-      try{
-        let {status , data} = await http.get('/acticle/all?pagesize=1');
-        console.log(data);
-      }catch(err){
-        message.error('请求失败');
+    window.document.documentElement.scrollTop = 0;
+    const data = async () => {
+      try {
+        let name;
+        if (Location.state !== null) {
+          name = (Location.state as StateIprops).name;
+          let { data, articleLength } = await http.get<httpIprops, httpIprops>(
+            `/acticle/one?pagesize=${pagesize}&page=1&label=${name}`
+          );
+          setCondition(name);
+          setLength(articleLength);
+          setActicle(data);
+          message.success(name + "共" + articleLength + "篇");
+        } else {
+          name = "全部文章";
+          let { data, articleLength } = await http.get<httpIprops, httpIprops>(
+            `/acticle/all?pagesize=${pagesize}&page=1`
+          );
+          setLength(articleLength);
+          setActicle(data);
+          setCondition("全部文章");
+          message.success("全部文章共" + articleLength + "篇");
+        }
+
+        let { data } = await http.get("/acticle/classify");
+        setClassify(data);
+        let { articleLength } = await http.get<httpIprops, httpIprops>(
+          `/acticle/all?pagesize=${pagesize}&page=1`
+        );
+        setTextLength(articleLength);
+        setCurrent(1);
+      } catch (err) {
+        message.error("请求失败");
       }
-    }
+    };
     data();
-    
-    let name;
-    if(Location.state !== null){
-      name = (Location.state as StateIprops).name;
-    }else{
-      name = "全部文章"
-    }
-    setCondition(name);
-    
-    setActicle([
-      {
-        id: 1312413,
-        name: "haha",
-        label: [
-          { name: "java", color: "red" },
-          { name: "react", color: "blue" },
-        ],
-        img: "/css.webp",
-        startDate: "123123",
-        refershDate: "123123",
-      },
-      {
-        id: 2342352,
-        name: "haha",
-        label: [{ name: "java", color: "red" }],
-        img: "/html.webp",
-        startDate: "123123",
-        refershDate: "123123",
-      },
-      {
-        id: 3123214,
-        name: "haha",
-        label: [{ name: "java", color: "red" }],
+  }, [Location.state]);
 
-        img: "/react.webp",
-        startDate: "123123",
-        refershDate: "123123",
-      },
-      {
-        id: 125123,
-        name: "haha",
-        label: [{ name: "java", color: "red" }],
-
-        img: "/随笔.webp",
-        startDate: "123123",
-        refershDate: "123123",
-      },
-      {
-        id: 1241244,
-        name: "haha",
-        label: [{ name: "java", color: "red" }],
-
-        img: "/随笔.webp",
-        startDate: "123123",
-        refershDate: "123123",
-      },
-    ]);
-  }, []);
-
-  const onSearch = (value: string) => {
+  const onSearch = async (value: string) => {
     setSearch(true);
-    setText("");
-    setTimeout(() => {
-      message.success("搜搜");
-      setSearch(false);
-    }, 1000);
-    console.log(value);
+    // setText("");
+    let { data , articleLength } = await http.get<httpIprops, httpIprops>("/acticle/check", {
+      params: {
+        name: value,
+        pagesize: 5,
+        page: 1,
+      },
+    });
+    setCurrent(1);
+    setCondition("相关文章");
+    setLength(articleLength);
+    setActicle(data);
+    message.success("搜索成功");
+    setSearch(false);
   };
 
   const onChangeHandle = (e: ChangeEvent<HTMLInputElement>) => {
@@ -129,12 +128,80 @@ export default function Inedx() {
     navigate(`/article/${props}`);
     console.log(props);
   };
+  // 分页
+  const onChangePagination = async (page: number, pagesize: number) => {
+    if (condition === "全部文章") {
+      let { data, articleLength } = await http.get<httpIprops, httpIprops>(
+        `/acticle/all?pagesize=${pagesize}&page=${page}`
+      );
+      setLength(articleLength);
+      setActicle(data);
+    }
+    else if(condition === '相关文章'){
+      let { data , articleLength } = await http.get<httpIprops, httpIprops>("/acticle/check", {
+        params: {
+          name: text,
+          pagesize: 5,
+          page: page,
+        },
+      });
+      setCondition("相关文章");
+      setLength(articleLength);
+      setActicle(data);
+      setSearch(false);
+    }
+     else {
+      let { data, articleLength } = await http.get<httpIprops, httpIprops>(
+        `/acticle/one?pagesize=${pagesize}&page=${page}&label=${condition}`
+      );
+      setLength(articleLength);
+      setActicle(data);
+    }
+    setCurrent(page);
+  };
+  // 分类以及标签
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
+  // 获取分类
+  const classifyHandle = async (props: string) => {
+    let { data, articleLength } = await http.get<httpIprops, httpIprops>(
+      `/acticle/one?pagesize=${pagesize}&page=1&label=${props}`
+    );
+    setCondition(props);
+    setLength(articleLength);
+    setActicle(data);
+    message.success(props + "共" + articleLength + "篇");
+    setIsModalVisible(false);
+  };
+
+  //获取所有文章
+  const AllHandle = async () => {
+    let { data, articleLength } = await http.get<httpIprops, httpIprops>(
+      `/acticle/all?pagesize=${pagesize}&page=1`
+    );
+    setLength(articleLength);
+    setActicle(data);
+    setCondition("全部文章");
+    setCurrent(1);
+    message.success("全部文章共" + articleLength + "篇");
+  };
+
   return (
     <div className="Acticle">
       <div className="Acticle-top">
         <MyMessage />
         <Card
-          title={`${condition} 6篇`}
+          title={`${condition} ${articleLength}篇`}
           className="Acticle-card"
           extra={
             <Search
@@ -152,8 +219,8 @@ export default function Inedx() {
               {acticles.map((item, index) => {
                 return (
                   <div
-                    onClick={() => OnClickHandle(item.id)}
-                    key={item.id}
+                    onClick={() => OnClickHandle(item._id)}
+                    key={item._id}
                     className="Acticle-section-left-acticle"
                   >
                     {index % 2 === 0 ? (
@@ -209,27 +276,31 @@ export default function Inedx() {
                 className="pagination"
                 showQuickJumper
                 defaultCurrent={1}
+                current={current}
                 defaultPageSize={5}
-                total={100}
+                total={articleLength}
                 showSizeChanger={false}
+                onChange={(page, pagesize) =>
+                  onChangePagination(page, pagesize)
+                }
               />
             </div>
             <div className="Acticle-section-right">
               <div className="Acticle-section-right-all">
                 <div className="all-1">
                   <div>
-                    <div className="all-1-1">
+                    <div className="all-1-1" onClick={AllHandle}>
                       <BookOutlined />
                       文章
                     </div>
-                    <div className="all-1-2">2篇</div>
+                    <div className="all-1-2">{length}篇</div>
                   </div>
                   <div className="all-1-2">
-                    <div className="all-1-1">
+                    <div className="all-1-1" onClick={() => showModal()}>
                       <BranchesOutlined />
                       分类
                     </div>
-                    <div className="all-1-2">2篇</div>
+                    <div className="all-1-2">{classify.length}种</div>
                   </div>
                   <div className="all-1-3">
                     <div className="all-1-1">
@@ -273,6 +344,30 @@ export default function Inedx() {
           </div>
         </Card>
       </div>
+      <Modal
+        title="所有分类"
+        visible={isModalVisible}
+        footer={null}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        <div className="Model">
+          {classify.map((item) => {
+            return (
+              <div
+                className="Model-item"
+                key={item._id}
+                onClick={() => classifyHandle(item.name)}
+              >
+                <div className="Model-item-top">
+                  <img src={item.imgUrl} alt="" />
+                </div>
+                <div className="Model-item-bottom">{item.name}</div>
+              </div>
+            );
+          })}
+        </div>
+      </Modal>
     </div>
   );
 }

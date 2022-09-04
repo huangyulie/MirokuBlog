@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import MyMessage from "@/components/MyMessage/Index";
 import { Button, Card } from "antd";
 import MdEditor from "md-editor-rt";
-import { useNavigate } from "react-router-dom";
-import { AlignRightOutlined } from "@ant-design/icons";
+// import { useNavigate } from "react-router-dom";
 import "md-editor-rt/lib/style.css";
 
 import "./index.less";
@@ -16,10 +15,11 @@ export default function Markdown() {
   });
   const editorId = "my-editor";
 
-  let navigate = useNavigate();
+  // let navigate = useNavigate();
 
   const onClick = () => {
-    navigate("/article");
+    window.history.back();
+    // navigate("/article");
   };
 
   useEffect(()=>{
