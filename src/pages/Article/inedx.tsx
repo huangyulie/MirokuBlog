@@ -1,6 +1,7 @@
 import React, { useEffect, useState, ChangeEvent } from "react";
-import { Card, Tag, Input, message, Pagination, Modal } from "antd";
+import { Card, Tag, Input, message, Pagination, Modal,List  } from "antd";
 import MyMessage from "@/components/MyMessage/Index";
+import  moment  from "moment";
 import {
   CalendarOutlined,
   ReloadOutlined,
@@ -16,6 +17,7 @@ import { http } from "@/utils/index";
 const { Search } = Input;
 
 interface labelProps {
+  _id:number;
   color: string;
   name: string;
 }
@@ -53,17 +55,26 @@ export default function Inedx() {
   const [articleLength, setLength] = useState(0);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [current , setCurrent] = useState(1);
+  const [isModalOpen2, setIsModalOpen2] = useState(false);
   // 获取分类
   const [classify, setClassify] = useState<classifyIprops[]>([]);
   // 获取所有文章数量
   const [length, setTextLength] = useState<number>(0);
-
+  const [isModalVisible1, setIsModalVisible1] = useState(false);
+  // 获取所有标签
+  const [label , setLabel] = useState<labelProps[]>([]);
+  // 单个标签
+  const [oneLabel , setOneLabel] = useState<string>();
+  // 获取日期标签
+  const [date , setDate] = useState([]);
+  // 相关时间
+  const [aboutDate,setAboutDate] = useState('');
   const navigate = useNavigate();
   const Location = useLocation();
   const pagesize = 5;
 
   useEffect(() => {
-    window.document.documentElement.scrollTop = 0;
+    window.document.documentElement.scrollTop = 0;    
     const data = async () => {
       try {
         let name;
@@ -92,14 +103,19 @@ export default function Inedx() {
         let { articleLength } = await http.get<httpIprops, httpIprops>(
           `/acticle/all?pagesize=${pagesize}&page=1`
         );
+        let  res  = await http.get('/acticle/label');
+        setLabel(res.data);
+
         setTextLength(articleLength);
         setCurrent(1);
+        let resp = await http.get('/acticle/date');
+        setDate(resp.data);        
       } catch (err) {
         message.error("请求失败");
       }
     };
     data();
-  }, [Location.state]);
+  }, [Location.state]);// eslint-disable-line react-hooks/exhaustive-deps
 
   const onSearch = async (value: string) => {
     setSearch(true);
@@ -150,6 +166,34 @@ export default function Inedx() {
       setActicle(data);
       setSearch(false);
     }
+    else if(condition === '相关标签'){
+      let {articleLength , data } = await http.get<httpIprops, httpIprops>('/acticle/oneLabel',{
+        params:{
+          pagesize:pagesize,
+          page:page,
+          name:oneLabel
+        }
+      })
+      setIsModalVisible1(false);
+      setLength(articleLength);
+      setActicle(data);
+      setCondition("相关标签");
+      setCurrent(1);
+    }
+    else if(condition === '相关时间'){
+      let {data,articleLength} = await http.get<httpIprops,httpIprops>('/acticle/dateone',{
+        params:{
+          pagesize,
+          page,
+          name:aboutDate
+        }
+      })
+      setIsModalOpen2(false);
+      setLength(articleLength);
+      setActicle(data);
+      setCondition("相关时间");
+      setCurrent(1);
+    }
      else {
       let { data, articleLength } = await http.get<httpIprops, httpIprops>(
         `/acticle/one?pagesize=${pagesize}&page=${page}&label=${condition}`
@@ -171,6 +215,18 @@ export default function Inedx() {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
+  // 标签
+  const showModal1 = () => {
+    setIsModalVisible1(true);
+  };
+
+  const handleOk1 = () => {
+    setIsModalVisible1(false);
+  };
+
+  const handleCancel1 = () => {
+    setIsModalVisible1(false);
+  };
 
   // 获取分类
   const classifyHandle = async (props: string) => {
@@ -182,6 +238,18 @@ export default function Inedx() {
     setActicle(data);
     message.success(props + "共" + articleLength + "篇");
     setIsModalVisible(false);
+  };
+  // 获取所有时间
+  const showModal2 = () => {
+    setIsModalOpen2(true);
+  };
+
+  const handleOk2 = () => {
+    setIsModalOpen2(false);
+  };
+
+  const handleCancel2 = () => {
+    setIsModalOpen2(false);
   };
 
   //获取所有文章
@@ -195,6 +263,40 @@ export default function Inedx() {
     setCurrent(1);
     message.success("全部文章共" + articleLength + "篇");
   };
+
+  // 标签
+  const TagHandle = async(props: string)=>{
+    let {articleLength , data } = await http.get<httpIprops, httpIprops>('/acticle/oneLabel',{
+      params:{
+        pagesize:5,
+        page:1,
+        name:props
+      }
+    })
+    setOneLabel(props);
+    setIsModalVisible1(false);
+    setLength(articleLength);
+    setActicle(data);
+    setCondition("相关标签");
+    setCurrent(1);
+  }
+
+  // 获取所有时间的文章
+  const dateHandle = async(props: string)=>{
+    let {data,articleLength} = await http.get<httpIprops,httpIprops>('/acticle/dateone',{
+      params:{
+        pagesize:5,
+        page:1,
+        name:props
+      }
+    })
+    setAboutDate(props)
+    setIsModalOpen2(false);
+    setLength(articleLength);
+    setActicle(data);
+    setCondition("相关时间");
+    setCurrent(1);
+  }
 
   return (
     <div className="Acticle">
@@ -228,8 +330,8 @@ export default function Inedx() {
                         <div className="name">{item.name}</div>
                         <div className="data">
                           <CalendarOutlined />
-                          發表於{item.startDate} | <ReloadOutlined />
-                          更新於{item.refershDate}
+                          發表於{moment(parseInt(item.startDate)).format("YYYY年MM月DD日 HH:mm:ss")} | <ReloadOutlined />
+                          更新於{moment(parseInt(item.refershDate)).format("YYYY年MM月DD日 HH:mm:ss")}
                         </div>
                         <div className="label">
                           {item.label.map((item, index) => {
@@ -255,8 +357,8 @@ export default function Inedx() {
                         <div className="name">{item.name}</div>
                         <div className="data">
                           <CalendarOutlined />
-                          發表於{item.startDate} | <ReloadOutlined />
-                          更新於{item.refershDate}
+                          發表於{moment(parseInt(item.startDate)).format("YYYY年MM月DD日 HH:mm:ss")} | <ReloadOutlined />
+                          更新於{moment(parseInt(item.refershDate)).format("YYYY年MM月DD日 HH:mm:ss")}
                         </div>
                         <div className="label">
                           {item.label.map((item, index) => {
@@ -302,17 +404,17 @@ export default function Inedx() {
                     </div>
                     <div className="all-1-2">{classify.length}种</div>
                   </div>
-                  <div className="all-1-3">
+                  <div className="all-1-3" onClick={showModal1}>
                     <div className="all-1-1">
                       <TagsOutlined />
                       标签
                     </div>
-                    <div className="all-1-2">2篇</div>
+                    <div className="all-1-2">{label.length}种</div>
                   </div>
                 </div>
                 <div className="all-2">
                   <div className="all-2-top">
-                    <div className="all-2-1">
+                    <div className="all-2-1" onClick={showModal2}>
                       <FullscreenOutlined />
                       展开
                     </div>
@@ -323,18 +425,19 @@ export default function Inedx() {
                   </div>
                   <div className="all-2-bottom">
                     <div className="all-2-bottom-1">
-                      <div>
-                        2022年十月<p>2篇</p>
-                      </div>
-                      <div>2</div>
-                      <div>3</div>
-                      <div>4</div>
-                      <div>5</div>
-                      <div>6</div>
-                      <div>7</div>
-                      <div>8</div>
-                      <div>9</div>
-                      <div>10</div>
+                    {
+                      date.map((item: any ,index)=>{
+                        if(index<10){
+                          return(
+                            <div key={index} onClick={()=>dateHandle(item.date)}>
+                            {item.date}<p>{item.length}篇</p>
+                          </div>
+                          )
+                        }else{
+                          return null;
+                        }
+                      })
+                    }
                     </div>
                   </div>
                 </div>
@@ -367,6 +470,38 @@ export default function Inedx() {
             );
           })}
         </div>
+      </Modal>
+      <Modal title="全部标签" footer={null} visible={isModalVisible1} onOk={handleOk1} onCancel={handleCancel1}>
+        <div className="ModelLabel">
+          {
+            label.map((item)=>{
+              return(
+                <Tag key={item._id} color={item.color} className="Tag" onClick={()=>TagHandle(item.name)}>{item.name}</Tag>
+              )
+            })
+          }
+        </div>
+      </Modal>
+      <Modal title="所有时间" visible={isModalOpen2} onOk={handleOk2} onCancel={handleCancel2}>
+      <List
+    grid={{
+      gutter: 16,
+      xs: 1,
+      sm: 2,
+      md: 3,
+      lg: 3,
+      xl: 3,
+      xxl: 3,
+    }}
+    dataSource={date}
+    renderItem={(item: any) => (
+      <List.Item>
+        <Card title={item.date} className="ListCard" onClick={()=>dateHandle(item.date)}>
+          <div className="ListCardDiv">{item.length}篇</div>
+        </Card>
+      </List.Item>
+    )}
+  />
       </Modal>
     </div>
   );
