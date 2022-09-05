@@ -19,6 +19,7 @@ const Home: React.FC = (): React.ReactElement => {
 
   // 显示标签
   useEffect(() => {
+    window.document.title = "首页|MirokuBlog"
 
     const data = async()=>{
       let { data } = await http.get("/acticle/classify");

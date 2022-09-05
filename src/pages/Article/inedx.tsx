@@ -69,9 +69,13 @@ export default function Inedx() {
   const [date, setDate] = useState([]);
   // 相关时间
   const [aboutDate, setAboutDate] = useState("");
+  // load
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const Location = useLocation();
   const pagesize = 5;
+
+  window.document.title = "文章|MirokuBlog";
 
   useEffect(() => {
     window.document.documentElement.scrollTop = 0;
@@ -110,6 +114,7 @@ export default function Inedx() {
         setCurrent(1);
         let resp = await http.get("/acticle/date");
         setDate(resp.data);
+        setLoading(false);
       } catch (err) {
         message.error("请求失败");
       }
@@ -334,6 +339,7 @@ export default function Inedx() {
               value={text}
             />
           }
+          loading={loading}
         >
           <div className="Acticle-section">
             <div className="Acticle-section-left">
@@ -349,12 +355,12 @@ export default function Inedx() {
                         <div className="name">{item.name}</div>
                         <div className="data">
                           <CalendarOutlined />
-                          發表於
+                          发表于
                           {moment(parseInt(item.startDate)).format(
                             "YYYY年MM月DD日 HH:mm:ss"
                           )}{" "}
                           | <ReloadOutlined />
-                          更新於
+                          更新于
                           {moment(parseInt(item.refershDate)).format(
                             "YYYY年MM月DD日 HH:mm:ss"
                           )}
@@ -383,12 +389,12 @@ export default function Inedx() {
                         <div className="name">{item.name}</div>
                         <div className="data">
                           <CalendarOutlined />
-                          發表於
+                          发表于
                           {moment(parseInt(item.startDate)).format(
                             "YYYY年MM月DD日 HH:mm:ss"
                           )}{" "}
                           | <ReloadOutlined />
-                          更新於
+                          更新于
                           {moment(parseInt(item.refershDate)).format(
                             "YYYY年MM月DD日 HH:mm:ss"
                           )}

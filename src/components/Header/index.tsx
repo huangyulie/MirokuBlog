@@ -41,7 +41,7 @@ export default function Index(props: any) {
           <NavLink
             className={({ isActive }) => (isActive ? color : "")}
             to="article"
-            onClick={() => changeTitle("首页|MirokuBlog")}
+            onClick={() => changeTitle("文章|MirokuBlog")}
           >
             文章
           </NavLink>
@@ -50,7 +50,7 @@ export default function Index(props: any) {
           <NavLink
             className={({ isActive }) => (isActive ? color : "")}
             to="imgs"
-            onClick={() => changeTitle("首页|MirokuBlog")}
+            onClick={() => changeTitle("图库|MirokuBlog")}
           >
             图库
           </NavLink>
@@ -59,7 +59,7 @@ export default function Index(props: any) {
           <NavLink
             className={({ isActive }) => (isActive ? color : "")}
             to="talk"
-            onClick={() => changeTitle("首页|MirokuBlog")}
+            onClick={() => changeTitle("说说|MirokuBlog")}
           >
             说说
           </NavLink>
@@ -68,7 +68,7 @@ export default function Index(props: any) {
           <NavLink
             className={({ isActive }) => (isActive ? color : "")}
             to="comment"
-            onClick={() => changeTitle("首页|MirokuBlog")}
+            onClick={() => changeTitle("留言|MirokuBlog")}
           >
             留言
           </NavLink>
@@ -77,7 +77,7 @@ export default function Index(props: any) {
           <NavLink
             className={({ isActive }) => (isActive ? color : "")}
             to="works"
-            onClick={() => changeTitle("首页|MirokuBlog")}
+            onClick={() => changeTitle("作品|MirokuBlog")}
           >
             作品
           </NavLink>
@@ -86,7 +86,7 @@ export default function Index(props: any) {
           <NavLink
             className={({ isActive }) => (isActive ? color : "")}
             to="experienced"
-            onClick={() => changeTitle("首页|MirokuBlog")}
+            onClick={() => changeTitle("建站|MirokuBlog")}
           >
             建站
           </NavLink>
@@ -96,7 +96,7 @@ export default function Index(props: any) {
           <NavLink
             className={({ isActive }) => (isActive ? color : "")}
             to="about"
-            onClick={() => changeTitle("首页|MirokuBlog")}
+            onClick={() => changeTitle("关于|MirokuBlog")}
           >
             关于
           </NavLink>
@@ -106,7 +106,7 @@ export default function Index(props: any) {
         <NavLink
           className={({ isActive }) => (isActive ? color : "")}
           to=""
-          onClick={() => changeTitle("首页|MirokuBlog")}
+          onClick={() => changeTitle("设置|MirokuBlog")}
         >
           <SettingOutlined />
         </NavLink>

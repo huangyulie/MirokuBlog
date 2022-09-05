@@ -10,6 +10,7 @@ const Home = lazy(() => import("@/pages/Home/index"));
 const About = lazy(() => import("@/pages/About/index"));
 const Article = lazy(() => import("@/pages/Article/inedx"));
 const Markdown = lazy(()=> import("@/pages/Markdown/Markdown"));
+const Build = lazy(()=>import('@/pages/Build/index'));
 
 export default function App() {
   return (
@@ -25,7 +26,7 @@ export default function App() {
           <Route path="/talk" element={<Home />}></Route>
           <Route path="/comment" element={<Home />}></Route>
           <Route path="/works" element={<Home />}></Route>
-          <Route path="/experienced" element={<Home />}></Route>
+          <Route path="/experienced" element={<Build />}></Route>
           <Route path="*" element={<Navigate to="/home" />}></Route>
         </Routes>
       </Suspense>

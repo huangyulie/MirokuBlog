@@ -1,0 +1,38 @@
+.Acticle {
+  width: 100%;
+
+  .Acticle-top {
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 100px;
+
+    .Acticle-card {
+      background-color: rgb(246, 246, 250);
+      .Timelone-item{
+        position: relative;
+        background-color: rgb(78, 203, 86);
+        padding: 10px;
+        border-radius: 10px;
+         box-shadow: 0 0 18px rgb(0 0 0 / 30%);
+         user-select: none;
+         cursor: pointer;
+         transition: all 0.3s;
+         &:hover{
+            transform: translateY(-10px);
+         }
+        .top{
+            font-size: 20px;
+            border-bottom: 1px solid rgb(0, 0, 0);
+        }
+        .bottom{
+            margin-top: 10px;
+            font-size: 15px;
+        }
+      }
+    }
+  }
+}
+
+.ant-timeline-item-tail{
+    border-left: 2px solid black !important;
+ }
