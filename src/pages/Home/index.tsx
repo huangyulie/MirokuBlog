@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
+import { BackTop } from "antd";
 import { http } from "@/utils";
 import "./index.less";
 import "../../../public/node.webp";
@@ -19,12 +20,12 @@ const Home: React.FC = (): React.ReactElement => {
 
   // 显示标签
   useEffect(() => {
-    window.document.title = "首页|MirokuBlog"
+    window.document.title = "首页|MirokuBlog";
 
-    const data = async()=>{
+    const data = async () => {
       let { data } = await http.get("/acticle/classify");
       setLabel(data);
-    }
+    };
     data();
   }, []);
   // 显示时期
@@ -37,10 +38,10 @@ const Home: React.FC = (): React.ReactElement => {
     };
   }, [data]);
 
-  const onclickHandle = (props: string)=>{
+  const onclickHandle = (props: string) => {
     console.log(props);
-    navigate(`/article`,{state:{name: props}});
-  } 
+    navigate(`/article`, { state: { name: props } });
+  };
 
   return (
     <div className="Home">
@@ -52,7 +53,11 @@ const Home: React.FC = (): React.ReactElement => {
         <div className="Home-title-top">
           {label.map((item) => {
             return (
-              <div className="Home-title-top-sign" key={item._id} onClick={()=>onclickHandle(item.name)}>
+              <div
+                className="Home-title-top-sign"
+                key={item._id}
+                onClick={() => onclickHandle(item.name)}
+              >
                 <div className="Home-title-top-sign-label">
                   <img src={item.imgUrl} alt="图片" />
                 </div>

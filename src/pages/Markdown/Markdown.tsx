@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import MyMessage from "@/components/MyMessage/Index";
-import { Button, Card } from "antd";
+import { Button, Card ,BackTop} from "antd";
 import MdEditor from "md-editor-rt";
 import { useParams  } from "react-router-dom";
 import "md-editor-rt/lib/style.css";
@@ -87,6 +87,7 @@ export default function Markdown() {
           </div>
         </Card>
       </div>
+      <BackTop />
     </div>
   );
 }
