@@ -129,6 +129,7 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: "static/css/[name].[contenthash:10].css",
       chunkFilename: "static/css/[name].[contenthash:10].chunk.css",
+      ignoreOrder: true
     }),
     !isProduction && new ReactRefreshWebpackPlugin(),
     // 将public下面的资源复制到dist目录去（除了index.html）
@@ -208,7 +209,7 @@ module.exports = {
   devServer: {
     open: true,
     host: "localhost",
-    port: 3000,
+    port: 3002,
     hot: true,
     compress: true,
     historyApiFallback: true,

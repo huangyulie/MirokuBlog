@@ -1,64 +1,52 @@
-.Header{
-    width: 100%;
-    height: 64px;
-    background-color: rgb(255, 255, 255);
-    box-shadow: 0 0 18px rgb(0 0 0 / 30%);
-    line-height: 64px;
-    display: flex;
-    position: sticky;
-    transition: all 0.3s;
-    top: 0;
-    z-index: 999;
-}
-
-.Header-extra{
-    background-color: transparent;
-    box-shadow: 0px 0px 0px 0px rgb(158, 157, 157);
-    transition: all 0.3s;
-}
-
-.Header-logo{
-    width: 300px;
+.Header {
+  font-size: (20/100rem);
+  height: (60/100rem);
+  background-color: #fff;
+  position: sticky;
+  top: 0;
+  display: flex;
+  .logo {
+    height: 100%;
+    width: 2rem;
+    background-color: red;
     text-align: center;
-    font-size: 30px;
-}
-
-.Header-nav{
+    img {
+      display: block;
+      height: 100%;
+      margin-left: 40%;
+    }
+  }
+  .nav {
+    flex: 1;
     display: flex;
-    width: 200px;
-    flex: 1 ;
-    a{
-        display:inline-block;
-        font-size: 25px;
-        // background-color: red;
-        margin-top: 7px;
-        width: 100px;
-        height: 50px;
-        line-height: 50px;
-        text-align: center;
-        transition: all 0.5s;
-        border-bottom: 1px transparent solid;
-        &:hover{
-            border-bottom: 1px black solid;
-        }
+    line-height: (60/100rem);
+    a {
+      flex: 1;
+      text-align: center;
     }
-    div{
-        flex: 1;
+  }
+  .hidden {
+    width: 2rem;
+    height: 100%;
+    background-color: red;
+    .hidden-1 {
+      margin-left: 50%;
+      display: none;
+      font-size: (50/100rem);
     }
+  }
 }
 
-.Header-setting{
-    width: 300px;
-    text-align: center;
-    font-size: 30px;
-}
+@media screen and (max-width:768px){
+			
+}		
+@media screen and (min-width:768px){
+    
+}	
+@media screen and (min-width:1024px){
+    
+}	
+@media screen and (min-width:1200px){
+    
+}	
 
-.active{
-    color: white;
-    text-shadow: black 5px 5px 10px;
-
-}
-
-.active1{
-    color: rgb(2, 158, 109);
-}
