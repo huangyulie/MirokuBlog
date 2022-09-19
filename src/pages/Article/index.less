@@ -1,0 +1,113 @@
+.Article {
+  margin-top: 3vh;
+  height: 100vh;
+  width: 80%;
+  margin-left: 10%;
+  font-size: (19/100rem);
+  .Art-left-top {
+    width: 90%;
+    margin-left: 5%;
+    height: 40vh;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s;
+    overflow: hidden;
+    text-align: center;
+    .img {
+      height: 8vh;
+      width: 100%;
+      margin-top: 2vh;
+      position: relative;
+      .img-1 {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-left: -4vh;
+        margin-top: -4vh;
+        width: 8vh;
+        height: 8vh;
+        border-radius: 50%;
+        overflow: hidden;
+        img {
+          max-height: 100%;
+        }
+      }
+    }
+    .name {
+      height: 4vh;
+      line-height: 4vh;
+      font-weight: 700;
+      font-size: (25/100rem);
+    }
+    .build {
+      height: 3vh;
+    }
+    .all {
+      margin-top: 2vh;
+      height: 8vh;
+      display: flex;
+      .all-item {
+        position: relative;
+        flex: 1;
+        overflow: hidden;
+        .all-item-div {
+          position: absolute;
+          top: 0.5vh;
+          left: 50%;
+          margin-left: -(25/100rem);
+          height: 7vh;
+          .title {
+            font-size: (15/100rem);
+          }
+          .title-1 {
+            font-weight: 700;
+          }
+        }
+      }
+    }
+    .BiliBili {
+      height: 5vh;
+      overflow: hidden;
+      cursor: pointer;
+      .link {
+        width: 80%;
+        margin: 10%;
+        height: 4vh;
+        margin-top: 0.5vh;
+        line-height: 4vh;
+        border-radius: 5px;
+        color: #fff;
+        font-weight: 700;
+        background-color: #3273dc;
+      }
+    }
+    .github {
+      margin-top: 2vh;
+      height: 5vh;
+      display: flex;
+      line-height: 5vh;
+      .github-item {
+        flex: 1;
+        font-size: (30/100rem);
+        .h {
+          cursor: pointer;
+        }
+      }
+    }
+    &:hover {
+      transform: translateY(-5px);
+    }
+  }
+  .Art-left-bottom{
+    width: 90%;
+    margin-left: 5%;
+    height: 40vh;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s;
+    overflow: hidden;
+    text-align: center;
+  }
+}

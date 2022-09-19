@@ -8,7 +8,7 @@ import Loading from "./components/Loading/Loading";
 import "@/App.less";
 const Home = lazy(() => import("@/pages/Home/index"));
 const About = lazy(() => import("@/pages/About/index"));
-// const Article = lazy(() => import("@/pages/Article/inedx"));
+const Article = lazy(() => import("@/pages/Article/index"));
 // const Markdown = lazy(()=> import("@/pages/Markdown/Markdown"));
 // const Build = lazy(()=>import('@/pages/Build/index'));
 
@@ -18,7 +18,7 @@ export default function App() {
       <Header/>
       <Suspense fallback={<Loading />}>
         <Routes>
-          <Route path="/about" element={<About />}></Route>
+          <Route path="/acticle" element={<Article />}></Route>
           <Route path="/home" element={<Home />}></Route>
           {/* <Route path="/article" element={<Article />}></Route>
           <Route path="/article/:id" element={<Markdown />}></Route>
