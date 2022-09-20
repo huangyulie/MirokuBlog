@@ -3,7 +3,7 @@
   height: 100vh;
   width: 80%;
   margin-left: 10%;
-  font-size: (19/100rem);
+  font-size: (13/100rem);
   .Art-left-top {
     width: 90%;
     margin-left: 5%;
@@ -38,13 +38,13 @@
       height: 4vh;
       line-height: 4vh;
       font-weight: 700;
-      font-size: (25/100rem);
+      font-size: (20/100rem);
     }
     .build {
       height: 3vh;
     }
     .all {
-      margin-top: 2vh;
+      margin-top: 1vh;
       height: 8vh;
       display: flex;
       .all-item {
@@ -99,15 +99,181 @@
       transform: translateY(-5px);
     }
   }
-  .Art-left-bottom{
+  .Art-left-bottom {
     width: 90%;
     margin-left: 5%;
-    height: 40vh;
+    margin-top: 2vh;
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
     transition: all 0.3s;
     overflow: hidden;
     text-align: center;
+    .title {
+      text-align: left;
+      padding-left: 1vw;
+      height: 3vh;
+      line-height: 3vh;
+      font-size: (15/100rem);
+      color: rgb(208, 207, 207);
+    }
+    .act {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      text-align: left;
+      padding: 0 1vw 1vw 1vw;
+      .act-item {
+        flex: 1;
+        .time {
+          padding-top: 1vw;
+          font-size: (14/100rem);
+          color: rgb(40, 120, 218);
+        }
+        .topic {
+          margin-bottom: 10px;
+          position: relative;
+          box-sizing: content-box;
+          font-size: (16/100rem);
+          color: black;
+          width: 100%;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis; //多行在这里修改数字即可
+          cursor: pointer;
+          transition: all 0.3s;
+        }
+        .tag {
+          float: right;
+        }
+      }
+    }
+    &:hover {
+      transform: translateY(-5px);
+    }
   }
+
+  .input {
+    width: 90%;
+    margin-left: 5%;
+  }
+  .classify {
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 2vh;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s;
+    overflow: hidden;
+    .title {
+      text-align: left;
+      padding-left: 1vw;
+      height: 3vh;
+      line-height: 3vh;
+      font-size: (15/100rem);
+      color: rgb(14, 141, 209);
+    }
+    .classify-item {
+      margin: 10px;
+      cursor: pointer;
+    }
+    .title-time {
+      position: relative;
+      height: 2vh;
+      line-height: 2vh;
+      margin: 10px 5px;
+      cursor: pointer;
+      transition: all 0.6s;
+      .titile-left {
+        position: absolute;
+        padding-left: 1vw;
+      }
+      .titile-right {
+        position: absolute;
+        right: 20px;
+        font-weight: 700;
+      }
+      &:hover {
+        border-bottom: red 1px solid;
+      }
+    }
+    .name{
+        height: 3vh;
+        line-height: 3vh;
+        padding-left: 1vw;
+    }
+    &:hover {
+      transform: translateY(-5px);
+    }
+  }
+  .acticli-item{
+    height: 15vh;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s;
+    display: flex;
+    overflow: hidden;
+    margin-bottom: 2vh;
+    cursor: pointer;
+    .item-left{
+        height: 15vh;
+        width: 15vh;
+        background-color: red;
+        img{
+            height: 100%;
+            width: 100%;
+        }
+    }
+    .item-right{
+        text-align: center;
+        flex:1;
+        .time{
+            margin-top: 2vh;
+            height: 3vh;
+            line-height: 3vh;
+            color: rgb(38, 128, 213);
+        }
+        .title{
+            height: 7vh;
+            line-height: 7vh;
+            font-size: (40/100rem);
+            font-weight: 700;
+
+        }
+        .classify1{
+            height: 3vh;
+            line-height: 3vh;
+            .left{
+                font-weight: 700;
+                float: left;
+                padding-left: 1vw;
+            }
+            .right{
+                float:right;
+            }
+        }
+    }
+    &:hover {
+        transform: translateY(-5px);
+      }
+  }
+}
+
+.topic::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: right;
+  bottom: 0;
+  height: 2px;
+  background: rgb(11, 153, 241);
+  transition: transform 0.5s cubic-bezier(0.93, 0.07, 0.17, 1);
+}
+.topic:hover::before {
+  transform: scaleX(1);
+  transform-origin: left;
 }

@@ -7,8 +7,9 @@
   // color: black;
 }
 
-html{
-    font-size: 100px;
+html {
+  font-size: 100px;
+  height: 100%;
 }
 
 ul li {
@@ -21,22 +22,24 @@ a {
 }
 
 body {
+  height: 100%;
   position: relative;
-  overflow:overlay;
-  background-color: rgba(245,245,245);
-// background-color: black;
+  overflow: overlay;
+  background-color: rgba(245, 245, 245);
 }
 
-.site {
-  display: flex;
+.site{
   min-height: 100vh;
+  position: relative;
+  display: flex;
   flex-direction: column;
 }
-.main {
-  flex: 1;
-}
-.active{
+
+.active {
   color: rgb(35, 162, 37);
+}
+.main{
+  flex-grow: 1;
 }
 
 /*整个滚动条*/
