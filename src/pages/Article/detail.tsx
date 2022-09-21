@@ -57,10 +57,6 @@ export default function Index() {
     setName(data.name);
   };
 
-  const clickHandle = (props: number | undefined) => {
-    console.log(props);
-  };
-
   return (
     <div className="Article">
       <Row>

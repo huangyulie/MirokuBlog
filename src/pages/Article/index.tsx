@@ -55,6 +55,7 @@ export default function Index() {
           <List
             pagination={{
               pageSize: 5,
+              showQuickJumper:true,
               total: article.length,
               onChange:()=>{
                 window.document.documentElement.scrollTop = 0;
