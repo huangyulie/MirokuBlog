@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Row, Col, Drawer } from "antd";
-import { http } from "../../utils/index";
 import "./index.less";
 import { NavLink } from "react-router-dom";
 import { AlignRightOutlined, SettingOutlined } from "@ant-design/icons";
@@ -23,22 +22,22 @@ export default function Index() {
         <div>MirokuBlog</div>
       </div>
       <div className="nav">
-        <NavLink to={"/home"} className="navA">
+        <NavLink to={"/home"} className="navA" onClick={()=>{window.document.title = "首页|MirokuBlog"}}>
           <div>🏡首页</div>
         </NavLink>
-        <NavLink to={"/acticle"} className="navA">
+        <NavLink to={"/acticle"} className="navA" onClick={()=>{window.document.title = "文章|MirokuBlog"}}>
           <div>📘文章</div>
         </NavLink>
-        <NavLink to={"/about"} className="navA">
+        <NavLink to={"/friend"} className="navA" onClick={()=>{window.document.title = "友链|MirokuBlog"}}>
           <div>❤️友链</div>
         </NavLink>
-        <NavLink to={"/about"} className="navA">
+        <NavLink to={"/message"} className="navA" onClick={()=>{window.document.title = "留言|MirokuBlog"}}>
           <div>📄留言</div>
         </NavLink>
-        <NavLink to={"/about"} className="navA">
+        <NavLink to={"/about"} className="navA" onClick={()=>{window.document.title = "动态|MirokuBlog"}}>
           <div>🔔动态</div>
         </NavLink>
-        <NavLink to={"/about"} className="navA">
+        <NavLink to={"/about"} className="navA" onClick={()=>{window.document.title = "关于|MirokuBlog"}}>
           <div>😼关于</div>
         </NavLink>
       </div>

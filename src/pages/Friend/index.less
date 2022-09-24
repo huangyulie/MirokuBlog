@@ -1,0 +1,43 @@
+.Friend{
+    display: block flex;
+    overflow: hidden;
+    width: 90%;
+    margin: 1vh 5%;
+    height: 9vh;
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s;
+    cursor: pointer;
+    .img{
+        height: 6vh;
+        width: 6vh;
+        margin: 1.5vh 0 0 10px;
+        border-radius: 50%;
+        overflow: hidden;
+        img{
+            min-width: 100%;
+            height: 100%;
+
+        }
+    }
+    .title{
+        text-align: center;
+        width: 50%;
+        .name{
+            margin-top: 10px;
+            color: rgb(0, 0, 0);
+            font-weight: 700;
+            font-size: (20/100rem);
+        }
+        .desc{
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow:ellipsis;
+            padding: 0 10px;
+        }
+    }
+    &:hover{
+        transform: translateY(-5px);
+    }
+}

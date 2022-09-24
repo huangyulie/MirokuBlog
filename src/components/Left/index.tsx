@@ -62,7 +62,7 @@ export default function Index() {
   };
 
   return (
-    <Col xs={24} md={8} lg={8} xl={6}>
+    <Col xs={24} md={8} lg={8} xl={6} id="Left">
       <div className="Art-left-top">
         <div className="img">
           <div className="img-1">

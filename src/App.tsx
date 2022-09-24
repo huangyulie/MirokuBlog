@@ -4,8 +4,10 @@ import { Routes, Route, Navigate } from "react-router-dom";
 // import Home from './pages/Home/index'
 import Header from "./components/Header/index";
 // import Footer from "@/components/Footer/index";
+import Right from "@/components/Right";
+import Left from "@/components/Left";
 import Loading from "./components/Loading/Loading";
-import { BackTop } from "antd";
+import { BackTop, Col, Row } from "antd";
 import { ArrowUpOutlined } from "@ant-design/icons";
 import "@/App.less";
 
@@ -23,6 +25,8 @@ const Home = lazy(() => import("@/pages/Home/index"));
 const About = lazy(() => import("@/pages/About/index"));
 const Article = lazy(() => import("@/pages/Article/index"));
 const Detail = lazy(() => import("@/pages/Article/detail"));
+const Friend = lazy(()=> import('@/pages/Friend/index'));
+const Message = lazy(()=>import('@/pages/Message/index'));
 // const Markdown = lazy(()=> import("@/pages/Markdown/Markdown"));
 // const Build = lazy(()=>import('@/pages/Build/index'));
 
@@ -31,21 +35,26 @@ export default function App() {
     <div className="site">
       <Header />
       <div className="main">
-        <Suspense fallback={<Loading />}>
-          <Routes>
-            <Route path="/acticle" element={<Article />}></Route>
-            <Route path="/home" element={<Home />}></Route>
-            <Route path="/acticle/:id" element={<Detail />}></Route>
-            {/* <Route path="/imgs" element={<Home />}></Route>
-          <Route path="/talk" element={<Home />}></Route>
-          <Route path="/comment" element={<Home />}></Route>
-          <Route path="/works" element={<Home />}></Route>
-          <Route path="/experienced" element={<Build />}></Route> */}
-            <Route path="*" element={<Navigate to="/home" />}></Route>
-          </Routes>
-        </Suspense>
+        <div className="Article">
+          <Row>
+            <Left />
+            <Col xs={24} md={16} lg={16} xl={12}>
+              <Suspense fallback={<Loading />}>
+                <Routes>
+                  <Route path="/acticle" element={<Article />}></Route>
+                  <Route path="/home" element={<Home />}></Route>
+                  <Route path="/acticle/:id" element={<Detail />}></Route>
+                  <Route path="/friend" element={<Friend />}></Route>
+                  <Route path="/about" element={<About />}></Route>
+                  <Route path="/message" element={<Message />}></Route>
+                  <Route path="*" element={<Navigate to="/home" />}></Route>
+                </Routes>
+              </Suspense>
+            </Col>
+            <Right />
+          </Row>
+        </div>
       </div>
-      {/* <Footer /> */}
       <BackTop>
         <div style={style}>
           <ArrowUpOutlined />

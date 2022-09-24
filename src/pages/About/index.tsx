@@ -1,49 +1,36 @@
-import React from "react";
-import QueueAnim from "rc-queue-anim";
+import React, { useEffect, useState } from "react";
+import MdEditor from "md-editor-rt";
+import "md-editor-rt/lib/style.css";
+import { Card } from "antd";
+import { http } from "@/utils";
 
-export default function index() {
+export default function Index() {
+  const [aboutMe, setAboutMe] = useState<any>();
+  const [aboutBuild, setAboutBuild] = useState<any>();
+  const [loading , setLoading] = useState(true);
+
+  useEffect(() => {
+    data();
+  }, []);
+  const data = async () => {
+    let { data } = await http.get("/api/about/about");
+    setAboutMe(data[0].text);
+    setAboutBuild(data[1].text);
+    setLoading(false);
+
+  };
   return (
     <div>
-      <QueueAnim type={["right", "left"]} className="demo-content">
-        <div className="demo-header" key="header">
-          <div className="logo">
-            <img
-              height="15"
-              src="https://zos.alipayobjects.com/rmsportal/TOXWfHIUGHvZIyb.svg"
-            />
-            <img
-              height="8"
-              src="https://zos.alipayobjects.com/rmsportal/glnFNVQMvQinmUr.svg"
-            />
-          </div>
-          <ul>
-            <li key="0"></li>
-            <li key="1"></li>
-            <li key="2"></li>
-          </ul>
-        </div>
-        <div className="demo-banner" key="banner">
-          <div className="point">
-            <ul>
-              <li />
-              <li />
-              <li />
-            </ul>
-          </div>
-        </div>
-        <QueueAnim className="demo-page" key="page" type="bottom">
-          <h1 key="h1" />
-          <p key="p" />
-          <div key="box" className="box">
-            <QueueAnim type="bottom" component="ul">
-              <li key="0" />
-              <li key="1" />
-              <li key="2" />
-            </QueueAnim>
-          </div>
-        </QueueAnim>
-        <div className="demo-footer" key="footer" />,
-      </QueueAnim>
+      <Card title="关于我" loading={loading}>
+        <MdEditor modelValue={aboutMe} previewOnly previewTheme={"cyanosis"} />
+      </Card>
+      <Card title="关于本站" loading={loading}>
+        <MdEditor
+          modelValue={aboutBuild}
+          previewOnly
+          previewTheme={"cyanosis"}
+        />
+      </Card>
     </div>
   );
 }

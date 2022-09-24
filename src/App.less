@@ -60,3 +60,54 @@ body {
   border-radius: 10px;
   background-color: rgb(232, 113, 16);
 }
+
+.Article {
+  margin-top: 3vh;
+  height: 100vh;
+  width: 80%;
+  margin-left: 10%;
+  font-size: (13/100rem);
+}
+
+@media screen and (max-width: 768px) {
+  .Header {
+    .nav {
+      visibility: hidden;
+    }
+    .hidden {
+      .hidden-1 {
+        display: block;
+      }
+      .hidden-2{
+        display: none;
+      }
+    }
+  }
+  #Col,#Left{
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1199px) {
+  #Col{
+    display: none;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .Header {
+    .nav {
+      visibility: visible;
+    }
+    .hidden {
+      .hidden-1 {
+        display: none;
+      }
+      .hidden-2{
+        display: block;
+      }
+    }
+  }
+  #Col,#Left{
+    display: block;
+  }
+}

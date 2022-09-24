@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Row, Col, Tag, List } from "antd";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 import "./index.less";
 import { http } from "@/utils";
 import moment from "moment";
@@ -32,6 +32,7 @@ type articleIprops = {
 export default function Index() {
   const [article, setArticle] = useState<articleIprops[]>([]);
   const nav = useNavigate();
+  const [Loading, setLoading] = useState<boolean>(true);
   // 2455323248886ea80cad6e21e75dd20a
   useEffect(() => {
     Article();
@@ -40,76 +41,69 @@ export default function Index() {
   const Article = async () => {
     let { data } = await http.get<any, any>("/api/acticle/all");
     setArticle(data);
-    console.log(data);
+    setLoading(false);
   };
 
   const clickHandle = (props: number | undefined) => {
-    nav(`/acticle/${props}`)
+    nav(`/acticle/${props}`);
   };
 
   return (
-    <div className="Article">
-      <Row >
-        <Left />
-        <Col xs={24} md={16} lg={16} xl={12}>
-          <List
-            pagination={{
-              pageSize: 5,
-              showQuickJumper:true,
-              total: article.length,
-              onChange:()=>{
-                window.document.documentElement.scrollTop = 0;
-              }
-            }}
-            className="List"
-            dataSource={article}
-            renderItem={(item) => (
-              <List.Item>
-                <div
-                  className="acticli-item"
-                  key={item._id}
-                  onClick={() => clickHandle(item._id)}
-                >
-                  <div className="item-left">
-                    <img src={item.classify?.imgUrl} alt="" />
-                  </div>
-                  <div className="item-right">
-                    <div className="time">
-                      📆创建于
-                      {moment(parseInt(item.startDate)).format(
+    <>
+      <List
+        loading={Loading}
+        pagination={{
+          pageSize: 5,
+          showQuickJumper: true,
+          total: article.length,
+          onChange: () => {
+            window.document.documentElement.scrollTop = 0;
+          },
+        }}
+        className="List"
+        dataSource={article}
+        renderItem={(item) => (
+          <List.Item>
+            <div
+              className="acticli-item"
+              key={item._id}
+              onClick={() => clickHandle(item._id)}
+            >
+              <div className="item-left">
+                <img src={item.classify?.imgUrl} alt="" />
+              </div>
+              <div className="item-right">
+                <div className="time">
+                  📆创建于
+                  {moment(parseInt(item.startDate)).format(
+                    "YYYY年MM月DD日 HH:mm:ss"
+                  )}
+                  &nbsp;| 🔨
+                  {item.refershDate
+                    ? `修改于${moment(parseInt(item.refershDate)).format(
                         "YYYY年MM月DD日 HH:mm:ss"
-                      )}
-                      &nbsp;| 🔨
-                      {item.refershDate
-                        ? `修改于${moment(parseInt(item.refershDate)).format(
-                            "YYYY年MM月DD日 HH:mm:ss"
-                          )}`
-                        : "未修改"}
-                    </div>
-                    <div className="title">{item.name}</div>
-                    <div className="classify1">
-                      <div className="left">分类:{item.classify?.name}</div>
-                      <div className="right">
-                        {item.label?.map((item) => {
-                          return (
-                            <Tag key={item._id} color={item.color}>
-                              {item.name}
-                            </Tag>
-                          );
-                        })}
-                      </div>
-                    </div>
+                      )}`
+                    : "未修改"}
+                </div>
+                <div className="title">{item.name}</div>
+                <div className="classify1">
+                  <div className="left">分类:{item.classify?.name}</div>
+                  <div className="right">
+                    {item.label?.map((item) => {
+                      return (
+                        <Tag key={item._id} color={item.color}>
+                          {item.name}
+                        </Tag>
+                      );
+                    })}
                   </div>
                 </div>
-              </List.Item>
-            )}
-          ></List>
-        </Col>
-        <Right />
-      </Row>
-      <div className="footer">
-        12312
-      </div>
-    </div>
+              </div>
+            </div>
+          </List.Item>
+        )}
+      ></List>
+      <div className="footer">12312</div>
+    </>
   );
 }
