@@ -1,6 +1,8 @@
 .message-main {
   // background-color: red;
+  position: relative;
   display: flex;
+  flex-wrap: wrap;
   .left {
     overflow: hidden;
     width: 40px;
@@ -27,6 +29,11 @@
       .name {
         color: black;
         font-weight: 700;
+      }
+      .ico {
+        cursor: pointer;
+        flex: 1;
+        color: rgb(39, 155, 178);
       }
       div {
         margin-right: 5px;
@@ -72,6 +79,40 @@
           font-size: (15/100rem);
         }
       }
+    }
+  }
+  .hidden {
+    flex: 0 0 100%;
+    display: none;
+  }
+  .block {
+    display: block;
+  }
+}
+
+.message-content {
+  display: flex;
+  .message-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    overflow: hidden;
+    img {
+      height: 100%;
+      width: 100%;
+    }
+  }
+  .message-input {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    .content-input {
+      .input-item {
+        margin: 5px 5px;
+      }
+    }
+    .content-textarea{
+      flex:  0 0 100%;
     }
   }
 }
