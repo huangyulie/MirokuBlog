@@ -3,6 +3,7 @@
   position: relative;
   display: flex;
   flex-wrap: wrap;
+  margin-bottom: 10px;
   .left {
     overflow: hidden;
     width: 40px;
@@ -33,6 +34,7 @@
       .ico {
         cursor: pointer;
         flex: 1;
+        text-align: right;
         color: rgb(39, 155, 178);
       }
       div {
@@ -83,10 +85,8 @@
   }
   .hidden {
     flex: 0 0 100%;
-    display: none;
-  }
-  .block {
     display: block;
+    margin-top: 10px;
   }
 }
 
@@ -113,6 +113,31 @@
     }
     .content-textarea{
       flex:  0 0 100%;
+      .texxxxxxx{
+        height: 100px;
+      }
+    }
+    .content-commit{
+      width: 100%;
+      margin-bottom: 10px;
+      .contene-button{
+        background-color: rgb(82, 159, 246);
+        color: #fff;
+        float:right;
+        margin-bottom: 10px;
+      }
+      .contene-cancer{
+        float:right;
+        margin-right: 10px;
+      }
+      border-bottom: 1px rgb(219, 217, 217) solid;
     }
   }
+}
+
+.message-count{
+  margin: 10px 0;
+  text-align: center;
+  color: rgb(171, 170, 170);
+  font-size: (17/100rem);
 }
