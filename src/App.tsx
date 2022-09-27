@@ -21,6 +21,7 @@ const style: React.CSSProperties = {
   textAlign: "center",
   fontSize: 14,
 };
+
 const Home = lazy(() => import("@/pages/Home/index"));
 const About = lazy(() => import("@/pages/About/index"));
 const Article = lazy(() => import("@/pages/Article/index"));

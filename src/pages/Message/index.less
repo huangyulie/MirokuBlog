@@ -47,6 +47,7 @@
     .children {
       margin-top: 10px;
       display: flex;
+      flex-wrap: wrap;
       .c-left {
         margin-right: 10px;
         overflow: hidden;
@@ -73,12 +74,73 @@
             color: black;
             font-weight: 700;
           }
+          .ico {
+            cursor: pointer;
+            flex: 1;
+            text-align: right;
+            color: rgb(39, 155, 178);
+          }
           div {
             margin-right: 5px;
           }
         }
         .c-content {
           font-size: (15/100rem);
+        }
+      }
+      .hidden {
+        flex: 0 0 100%;
+        display: block;
+        margin-top: 10px;
+      }
+      .children1 {
+        display: flex;
+        flex-wrap: wrap;
+        flex: 0 0 100%;
+        .c-left {
+          margin-right: 10px;
+          overflow: hidden;
+          width: 30px;
+          .c-img {
+            width: 30px;
+            height: 30px;
+            border-radius: 5px;
+            overflow: hidden;
+            img {
+              max-width: 100%;
+            }
+          }
+        }
+        .c-right {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          .c-title {
+            font-size: (12/100rem);
+            color: gray;
+            display: flex;
+            .name {
+              color: black;
+              font-weight: 700;
+            }
+            .ico {
+              cursor: pointer;
+              flex: 1;
+              text-align: right;
+              color: rgb(39, 155, 178);
+            }
+            div {
+              margin-right: 5px;
+            }
+          }
+          .c-content {
+            font-size: (15/100rem);
+          }
+        }
+        .hidden {
+          flex: 0 0 100%;
+          display: block;
+          margin-top: 10px;
         }
       }
     }
@@ -111,23 +173,23 @@
         margin: 5px 5px;
       }
     }
-    .content-textarea{
-      flex:  0 0 100%;
-      .texxxxxxx{
+    .content-textarea {
+      flex: 0 0 100%;
+      .texxxxxxx {
         height: 100px;
       }
     }
-    .content-commit{
+    .content-commit {
       width: 100%;
       margin-bottom: 10px;
-      .contene-button{
+      .contene-button {
         background-color: rgb(82, 159, 246);
         color: #fff;
-        float:right;
+        float: right;
         margin-bottom: 10px;
       }
-      .contene-cancer{
-        float:right;
+      .contene-cancer {
+        float: right;
         margin-right: 10px;
       }
       border-bottom: 1px rgb(219, 217, 217) solid;
@@ -135,7 +197,7 @@
   }
 }
 
-.message-count{
+.message-count {
   margin: 10px 0;
   text-align: center;
   color: rgb(171, 170, 170);

@@ -22,7 +22,7 @@ type Messageprops = {
   ip?: string;
   children?: Array<any>;
   imgUrl?: string;
-  parents?:number;
+  parents?: number;
 };
 
 export default function Index() {
@@ -36,7 +36,7 @@ export default function Index() {
     "http://localhost:3001/imgs/react.webp"
   );
 
-  const [cname , setCname] = useState<string>("");
+  const [cname, setCname] = useState<string>("");
   const [cemail, setCemail] = useState<string>("");
   const [clink, setClink] = useState<string>("");
   const [ctextarea, setCtextarea] = useState<string>("");
@@ -56,8 +56,7 @@ export default function Index() {
   const changeHandle = (e: ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
 
-      setImgUrl(`https://q1.qlogo.cn/g?b=qq&nk=${e.target.value}&s=100`);
-
+    setImgUrl(`https://q1.qlogo.cn/g?b=qq&nk=${e.target.value}&s=100`);
   };
 
   const changeHandleemail = (e: ChangeEvent<HTMLInputElement>) => {
@@ -95,7 +94,7 @@ export default function Index() {
       imgUrl,
       children: [],
     });
-    message.success('留言成功');
+    message.success("留言成功");
     data1();
   };
 
@@ -103,8 +102,7 @@ export default function Index() {
   const changeCHandle = (e: ChangeEvent<HTMLInputElement>) => {
     setCname(e.target.value);
 
-      setImgUrl(`https://q1.qlogo.cn/g?b=qq&nk=${e.target.value}&s=100`);
-
+    setImgUrl(`https://q1.qlogo.cn/g?b=qq&nk=${e.target.value}&s=100`);
   };
 
   const changeCHandleemail = (e: ChangeEvent<HTMLInputElement>) => {
@@ -119,7 +117,7 @@ export default function Index() {
     setCtextarea(e.target.value);
   };
 
-  const commitcHandle = async () => {
+  const commitcHandle = async (props?: string) => {
     if (cname.trim() === "") {
       message.error("请输入昵称");
       return;
@@ -132,18 +130,34 @@ export default function Index() {
       message.error("请输入留言");
       return;
     }
-    await http.post("/api/message/commit", {
-      parents:id,
-      cname,
-      cemail,
-      clink,
-      content: ctextarea,
-      date: +new Date(),
-      ip: "12331",
-      imgUrl,
-      children: [],
-    });
-    message.success('留言成功');
+    if (props === "p") {
+      await http.post("/api/message/commit", {
+        parent: id,
+        name: cname,
+        email: cemail,
+        link: clink,
+        content: ctextarea,
+        date: +new Date(),
+        ip: "12331",
+        imgUrl,
+        children: [],
+      });
+    } else {
+      console.log("111");
+      await http.post("/api/message/third", {
+        parent: id,
+        name: cname,
+        email: cemail,
+        link: clink,
+        content: ctextarea,
+        date: +new Date(),
+        ip: "12331",
+        imgUrl,
+        children: [],
+      });
+    }
+
+    message.success("留言成功");
     data1();
   };
 
@@ -232,7 +246,7 @@ export default function Index() {
               <div className="content">{item.content}</div>
               {item.children?.map((item) => {
                 return (
-                  <div className="children">
+                  <div className="children" key={item._id}>
                     <div className="c-left">
                       <div className="c-img">
                         <img
@@ -243,16 +257,245 @@ export default function Index() {
                     </div>
                     <div className="c-right">
                       <div className="c-title">
-                        <div className="name">Miroku</div>
-                        <div className="date">2012年达到</div>
-                        <div className="ip">来自dasd</div>
+                        <div className="name">{item.name}</div>
+                        <div className="date">
+                          {moment(item.date).format("YYYY-MM-DD")}
+                        </div>
+                        <div className="ip">{item.ip}</div>
+                        <div
+                          className="ico"
+                          onClick={() => {
+                            ClickHandle(item._id);
+                          }}
+                        >
+                          回复：
+                          <MessageOutlined />
+                        </div>
                       </div>
-                      <div className="c-content">
-                        哈哈,阿达 哈哈,阿达 哈哈,阿达 哈哈,阿达 哈哈,阿达
-                        哈哈,阿达 哈哈,阿达 哈哈,阿达 哈哈,阿达 哈哈,阿达
-                        哈哈,阿达
-                      </div>
+                      <div className="c-content">{item.content}</div>
                     </div>
+
+                    {item._id === id ? (
+                      <div className={"hidden"}>
+                        <div className="message-content">
+                          <div className="message-img">
+                            <img
+                              src="http://localhost:3001/imgs/react.webp"
+                              alt="logo"
+                            />
+                          </div>
+                          <div className="message-input">
+                            <Row>
+                              <Col
+                                xs={24}
+                                md={8}
+                                lg={8}
+                                xl={8}
+                                className="content-input"
+                              >
+                                <div className="input-item">
+                                  <Input
+                                    prefix={<UserOutlined />}
+                                    placeholder="昵称(必填)"
+                                    onChange={changeCHandle}
+                                    value={cname}
+                                  ></Input>
+                                </div>
+                              </Col>
+                              <Col
+                                xs={24}
+                                md={8}
+                                lg={8}
+                                xl={8}
+                                className="content-input"
+                              >
+                                <div className="input-item">
+                                  <Input
+                                    prefix={<MailOutlined />}
+                                    placeholder="邮箱(必填)"
+                                    onChange={changeCHandleemail}
+                                    value={cemail}
+                                  ></Input>
+                                </div>
+                              </Col>
+                              <Col
+                                xs={24}
+                                md={8}
+                                lg={8}
+                                xl={8}
+                                className="content-input"
+                              >
+                                <div className="input-item">
+                                  <Input
+                                    prefix={<CrownOutlined />}
+                                    placeholder="地址(选填)"
+                                    onChange={changeCHandleLink}
+                                    value={clink}
+                                  ></Input>
+                                </div>
+                              </Col>
+                            </Row>
+                            <div className="content-textarea">
+                              <TextArea
+                                showCount
+                                maxLength={500}
+                                placeholder={`回复${item.name}:`}
+                                onChange={changeCHandleText}
+                                value={ctextarea}
+                              />
+                            </div>
+                            <div className="content-commit">
+                              <Button
+                                onClick={() => {
+                                  commitcHandle("c");
+                                }}
+                                className="contene-button"
+                              >
+                                发送
+                              </Button>
+                              <Button
+                                className="contene-cancer"
+                                onClick={() => {
+                                  setId(0);
+                                }}
+                              >
+                                取消
+                              </Button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {item.children?.map((item: any) => {
+                      console.log(item);
+                      
+                      return (
+                        <div className="children1" key={item._id}>
+                          <div className="c-left">
+                            <div className="c-img">
+                              <img
+                                src="http://localhost:3001/imgs/logo.jpg"
+                                alt="logo"
+                              />
+                            </div>
+                          </div>
+                          <div className="c-right">
+                            <div className="c-title">
+                              <div className="name">{item.name}</div>
+                              <div className="date">
+                                {moment(item.date).format("YYYY-MM-DD")}
+                              </div>
+                              <div className="ip">{item.ip}</div>
+                              <div
+                                className="ico"
+                                onClick={() => {
+                                  ClickHandle(item._id);
+                                }}
+                              >
+                                回复：
+                                <MessageOutlined />
+                              </div>
+                            </div>
+                            <div className="c-content">回复<span style={{color:"rgb(39, 155, 178)"}}>{item.parent}:</span>{`${item.content}`}</div>
+                          </div>
+                          {item._id === id ? (
+                            <div className={"hidden"}>
+                              <div className="message-content">
+                                <div className="message-img">
+                                  <img
+                                    src="http://localhost:3001/imgs/react.webp"
+                                    alt="logo"
+                                  />
+                                </div>
+                                <div className="message-input">
+                                  <Row>
+                                    <Col
+                                      xs={24}
+                                      md={8}
+                                      lg={8}
+                                      xl={8}
+                                      className="content-input"
+                                    >
+                                      <div className="input-item">
+                                        <Input
+                                          prefix={<UserOutlined />}
+                                          placeholder="昵称(必填)"
+                                          onChange={changeCHandle}
+                                          value={cname}
+                                        ></Input>
+                                      </div>
+                                    </Col>
+                                    <Col
+                                      xs={24}
+                                      md={8}
+                                      lg={8}
+                                      xl={8}
+                                      className="content-input"
+                                    >
+                                      <div className="input-item">
+                                        <Input
+                                          prefix={<MailOutlined />}
+                                          placeholder="邮箱(必填)"
+                                          onChange={changeCHandleemail}
+                                          value={cemail}
+                                        ></Input>
+                                      </div>
+                                    </Col>
+                                    <Col
+                                      xs={24}
+                                      md={8}
+                                      lg={8}
+                                      xl={8}
+                                      className="content-input"
+                                    >
+                                      <div className="input-item">
+                                        <Input
+                                          prefix={<CrownOutlined />}
+                                          placeholder="地址(选填)"
+                                          onChange={changeCHandleLink}
+                                          value={clink}
+                                        ></Input>
+                                      </div>
+                                    </Col>
+                                  </Row>
+                                  <div className="content-textarea">
+                                    <TextArea
+                                      showCount
+                                      maxLength={500}
+                                      placeholder={`回复${item.name}:`}
+                                      onChange={changeCHandleText}
+                                      value={ctextarea}
+                                    />
+                                  </div>
+                                  <div className="content-commit">
+                                    <Button
+                                      onClick={() => {
+                                        commitcHandle("c");
+                                      }}
+                                      className="contene-button"
+                                    >
+                                      发送
+                                    </Button>
+                                    <Button
+                                      className="contene-cancer"
+                                      onClick={() => {
+                                        setId(0);
+                                      }}
+                                    >
+                                      取消
+                                    </Button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          ) : (
+                            <></>
+                          )}
+                        </div>
+                      );
+                    })}
                   </div>
                 );
               })}
@@ -323,11 +566,18 @@ export default function Index() {
                         maxLength={500}
                         placeholder={`回复${item.name}:`}
                         onChange={changeCHandleText}
-                            value={ctextarea}
+                        value={ctextarea}
                       />
                     </div>
                     <div className="content-commit">
-                      <Button onClick={commitcHandle} className="contene-button">发送</Button>
+                      <Button
+                        onClick={() => {
+                          commitcHandle("p");
+                        }}
+                        className="contene-button"
+                      >
+                        发送
+                      </Button>
                       <Button
                         className="contene-cancer"
                         onClick={() => {
