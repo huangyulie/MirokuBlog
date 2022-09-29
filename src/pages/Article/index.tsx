@@ -33,7 +33,6 @@ export default function Index() {
   const [article, setArticle] = useState<articleIprops[]>([]);
   const nav = useNavigate();
   const [Loading, setLoading] = useState<boolean>(true);
-  // 2455323248886ea80cad6e21e75dd20a
   useEffect(() => {
     Article();
   }, []);

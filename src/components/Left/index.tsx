@@ -94,17 +94,17 @@ export default function Index() {
         <div className="BiliBili">
           <div className="link">哔哩哔哩 Bilibili</div>
         </div>
-        <div className="github">
-          <div className="github-item">
+        <div className="MymessageItem">
+          <div className="MymessageItem-item">
             <GithubOutlined className="h" />
           </div>
-          <div className="github-item">
+          <div className="MymessageItem-item">
             <QqOutlined className="h" />
           </div>
-          <div className="github-item">
+          <div className="MymessageItem-item">
             <WechatOutlined className="h" />
           </div>
-          <div className="github-item">
+          <div className="MymessageItem-item">
             <MailOutlined className="h" />
           </div>
         </div>

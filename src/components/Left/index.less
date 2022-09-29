@@ -1,168 +1,168 @@
 .Article {
-    .Art-left-top {
-      width: 90%;
-      margin-left: 5%;
-      height: 40vh;
-      background-color: #fff;
-      border-radius: 5px;
-      box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
-      transition: all 0.3s;
-      overflow: hidden;
-      text-align: center;
-      .img {
-        height: 8vh;
-        width: 100%;
-        margin-top: 2vh;
-        position: relative;
-        .img-1 {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          margin-left: -4vh;
-          margin-top: -4vh;
-          width: 8vh;
-          height: 8vh;
-          border-radius: 50%;
-          overflow: hidden;
-          img {
-            max-height: 100%;
-          }
-        }
-      }
-      .name {
-        height: 4vh;
-        line-height: 4vh;
-        font-weight: 700;
-        font-size: (20/100rem);
-      }
-      .build {
-        height: 3vh;
-      }
-      .all {
-        margin-top: 1vh;
-        height: 8vh;
-        display: flex;
-        .all-item {
-          position: relative;
-          flex: 1;
-          overflow: hidden;
-          .all-item-div {
-            position: absolute;
-            top: 0.5vh;
-            left: 50%;
-            margin-left: -(25/100rem);
-            height: 7vh;
-            .title {
-              font-size: (15/100rem);
-            }
-            .title-1 {
-              font-weight: 700;
-            }
-          }
-        }
-      }
-      .BiliBili {
-        height: 5vh;
-        overflow: hidden;
-        cursor: pointer;
-        .link {
-          width: 80%;
-          margin: 10%;
-          height: 4vh;
-          margin-top: 0.5vh;
-          line-height: 4vh;
-          border-radius: 5px;
-          color: #fff;
-          font-weight: 700;
-          background-color: #3273dc;
-        }
-      }
-      .github {
-        margin-top: 2vh;
-        height: 5vh;
-        display: flex;
-        line-height: 5vh;
-        .github-item {
-          flex: 1;
-          font-size: (30/100rem);
-          .h {
-            cursor: pointer;
-          }
-        }
-      }
-      &:hover {
-        transform: translateY(-5px);
-      }
-    }
-    .Art-left-bottom {
-      width: 90%;
-      margin-left: 5%;
+  .Art-left-top {
+    width: 90%;
+    margin-left: 5%;
+    height: 40vh;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s;
+    overflow: hidden;
+    text-align: center;
+    .img {
+      height: 8vh;
+      width: 100%;
       margin-top: 2vh;
-      background-color: #fff;
-      border-radius: 5px;
-      box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
-      transition: all 0.3s;
-      overflow: hidden;
-      text-align: center;
-      .title {
-        text-align: left;
-        padding-left: 1vw;
-        height: 3vh;
-        line-height: 3vh;
-        font-size: (15/100rem);
-        color: rgb(208, 207, 207);
+      position: relative;
+      .img-1 {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-left: -4vh;
+        margin-top: -4vh;
+        width: 8vh;
+        height: 8vh;
+        border-radius: 50%;
+        overflow: hidden;
+        img {
+          max-height: 100%;
+        }
       }
-      .act {
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-        text-align: left;
-        padding: 0 1vw 1vw 1vw;
-        .act-item {
-          flex: 1;
-          .time {
-            padding-top: 1vw;
-            font-size: (14/100rem);
-            color: rgb(40, 120, 218);
+    }
+    .name {
+      height: 4vh;
+      line-height: 4vh;
+      font-weight: 700;
+      font-size: (20/100rem);
+    }
+    .build {
+      height: 3vh;
+    }
+    .all {
+      margin-top: 1vh;
+      height: 8vh;
+      display: flex;
+      .all-item {
+        position: relative;
+        flex: 1;
+        overflow: hidden;
+        .all-item-div {
+          position: absolute;
+          top: 0.5vh;
+          left: 50%;
+          margin-left: -(25/100rem);
+          height: 7vh;
+          .title {
+            font-size: (15/100rem);
           }
-          .topic {
-            margin-bottom: 10px;
-            position: relative;
-            box-sizing: content-box;
-            font-size: (16/100rem);
-            color: black;
-            width: 100%;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis; //多行在这里修改数字即可
-            cursor: pointer;
-            transition: all 0.3s;
-          }
-          .tag {
-            float: right;
+          .title-1 {
+            font-weight: 700;
           }
         }
       }
-      &:hover {
-        transform: translateY(-5px);
+    }
+    .BiliBili {
+      height: 5vh;
+      overflow: hidden;
+      cursor: pointer;
+      .link {
+        width: 80%;
+        margin: 10%;
+        height: 4vh;
+        margin-top: 0.5vh;
+        line-height: 4vh;
+        border-radius: 5px;
+        color: #fff;
+        font-weight: 700;
+        background-color: #3273dc;
       }
     }
+    .MymessageItem {
+      margin-top: 2vh;
+      height: 5vh;
+      display: flex;
+      line-height: 5vh;
+      .MymessageItem-item {
+        position: relative;
+        flex: 1;
+        font-size: (30/100rem);
+        .h {
+          cursor: pointer;
+        }
+      }
+    }
+    &:hover {
+      transform: translateY(-5px);
+    }
   }
-  
-  .topic::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    width: 100%;
-    transform: scaleX(0);
-    transform-origin: right;
-    bottom: 0;
-    height: 2px;
-    background: rgb(11, 153, 241);
-    transition: transform 0.5s cubic-bezier(0.93, 0.07, 0.17, 1);
+  .Art-left-bottom {
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 2vh;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s;
+    overflow: hidden;
+    text-align: center;
+    .title {
+      text-align: left;
+      padding-left: 1vw;
+      height: 3vh;
+      line-height: 3vh;
+      font-size: (15/100rem);
+      color: rgb(208, 207, 207);
+    }
+    .act {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      text-align: left;
+      padding: 0 1vw 1vw 1vw;
+      .act-item {
+        flex: 1;
+        .time {
+          padding-top: 1vw;
+          font-size: (14/100rem);
+          color: rgb(40, 120, 218);
+        }
+        .topic {
+          margin-bottom: 10px;
+          position: relative;
+          box-sizing: content-box;
+          font-size: (16/100rem);
+          color: black;
+          width: 100%;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis; //多行在这里修改数字即可
+          cursor: pointer;
+          transition: all 0.3s;
+        }
+        .tag {
+          float: right;
+        }
+      }
+    }
+    &:hover {
+      transform: translateY(-5px);
+    }
   }
-  .topic:hover::before {
-    transform: scaleX(1);
-    transform-origin: left;
-  }
-  
+}
+
+.topic::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: right;
+  bottom: 0;
+  height: 2px;
+  background: rgb(11, 153, 241);
+  transition: transform 0.5s cubic-bezier(0.93, 0.07, 0.17, 1);
+}
+.topic:hover::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}

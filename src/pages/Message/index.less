@@ -1,5 +1,6 @@
 .message-main {
   // background-color: red;
+  width: 100%;
   position: relative;
   display: flex;
   flex-wrap: wrap;
@@ -23,6 +24,7 @@
     flex: 1;
     display: flex;
     flex-direction: column;
+    width: 100%;
     .title {
       font-size: (12/100rem);
       color: gray;
@@ -34,6 +36,7 @@
       .ico {
         cursor: pointer;
         flex: 1;
+        font-size: 14px;
         text-align: right;
         color: rgb(39, 155, 178);
       }
@@ -43,6 +46,10 @@
     }
     .content {
       font-size: (15/100rem);
+    }
+    .ip {
+      color: gray;
+      font-size: 12px;
     }
     .children {
       margin-top: 10px;
@@ -77,6 +84,7 @@
           .ico {
             cursor: pointer;
             flex: 1;
+            font-size: 12px;
             text-align: right;
             color: rgb(39, 155, 178);
           }
@@ -93,6 +101,7 @@
         display: block;
         margin-top: 10px;
       }
+
       .children1 {
         display: flex;
         flex-wrap: wrap;
@@ -202,4 +211,22 @@
   text-align: center;
   color: rgb(171, 170, 170);
   font-size: (17/100rem);
+}
+
+#itemitemitem {
+  cursor: pointer;
+  color: rgb(47, 149, 160);
+  &:hover {
+    color: black;
+  }
+}
+
+#List-loading,
+#List-indexitem {
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  &:hover{
+    color: rgb(47, 149, 160);
+  }
 }

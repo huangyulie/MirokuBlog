@@ -22,22 +22,22 @@ export default function Index() {
         <div>MirokuBlog</div>
       </div>
       <div className="nav">
-        <NavLink to={"/home"} className="navA" onClick={()=>{window.document.title = "首页|MirokuBlog"}}>
+        <NavLink to={"/home"} className="navA" onClick={()=>{window.document.title = "首页|MirokuBlog"; window.document.documentElement.scrollTop = 0;}}>
           <div>🏡首页</div>
         </NavLink>
-        <NavLink to={"/acticle"} className="navA" onClick={()=>{window.document.title = "文章|MirokuBlog"}}>
+        <NavLink to={"/acticle"} className="navA" onClick={()=>{window.document.title = "文章|MirokuBlog"; window.document.documentElement.scrollTop = 0;}}>
           <div>📘文章</div>
         </NavLink>
-        <NavLink to={"/friend"} className="navA" onClick={()=>{window.document.title = "友链|MirokuBlog"}}>
+        <NavLink to={"/friend"} className="navA" onClick={()=>{window.document.title = "友链|MirokuBlog"; window.document.documentElement.scrollTop = 0;}}>
           <div>❤️友链</div>
         </NavLink>
-        <NavLink to={"/message"} className="navA" onClick={()=>{window.document.title = "留言|MirokuBlog"}}>
+        <NavLink to={"/message"} className="navA" onClick={()=>{window.document.title = "留言|MirokuBlog"; window.document.documentElement.scrollTop = 0;}}>
           <div>📄留言</div>
         </NavLink>
-        <NavLink to={"/about"} className="navA" onClick={()=>{window.document.title = "动态|MirokuBlog"}}>
+        <NavLink to={"/about"} className="navA" onClick={()=>{window.document.title = "动态|MirokuBlog"; window.document.documentElement.scrollTop = 0;}}>
           <div>🔔动态</div>
         </NavLink>
-        <NavLink to={"/about"} className="navA" onClick={()=>{window.document.title = "关于|MirokuBlog"}}>
+        <NavLink to={"/about"} className="navA" onClick={()=>{window.document.title = "关于|MirokuBlog"; window.document.documentElement.scrollTop = 0;}}>
           <div>😼关于</div>
         </NavLink>
       </div>
