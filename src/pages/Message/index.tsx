@@ -89,12 +89,6 @@ export default function Index() {
     setImgUrl(`https://q1.qlogo.cn/g?b=qq&nk=${e.target.value}&s=100`);
   }, 1000);
 
-  // const changeHandle = (e)=>{
-  //   setName(e.target.value);
-  //   console.log(e.target.value);
-  //   setImgUrl(`https://q1.qlogo.cn/g?b=qq&nk=${e.target.value}&s=100`);
-
-  // }
 
   const changeHandleemail = (e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -291,8 +285,6 @@ export default function Index() {
         }}
         dataSource={message1}
         renderItem={(item, ParentIndex) => {
-          console.log(hidden);
-          
           return (
             <List.Item>
               <div className="message-main" key={item._id}>
